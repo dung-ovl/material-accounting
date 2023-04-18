@@ -1,5 +1,5 @@
-import { UsersService } from './../../services/users/users.service';
-import { Controller, Get, Post } from '@nestjs/common';
+import { UsersService } from '../services/users.service';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller('users')
 export class UsersController {
