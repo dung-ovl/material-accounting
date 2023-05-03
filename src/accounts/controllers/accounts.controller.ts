@@ -12,11 +12,13 @@ import {
 import { AccountsService } from '../services/accounts.service';
 import { CreateAccountDto, UpdateAccountDto } from '../dtos/index';
 import { Taikhoan } from '../Taikhoan.entity';
+import { Public } from 'src/middleware/auth.public';
 
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
+  @Public()
   @Get()
   async getAll() {
     return await this.accountsService.findAll();
