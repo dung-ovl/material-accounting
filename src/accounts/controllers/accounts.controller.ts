@@ -14,7 +14,7 @@ import { CreateAccountDto, UpdateAccountDto } from '../dtos/index';
 import { Taikhoan } from '../Taikhoan.entity';
 import { Public } from 'src/middleware/auth.public';
 
-@Controller('accounts')
+@Controller('taikhoan')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
@@ -24,6 +24,7 @@ export class AccountsController {
     return await this.accountsService.findAll();
   }
 
+  @Public()
   @Get('/:maTk')
   async getById(@Param('maTk') maTk: string) {
     const acc = await this.accountsService.findOne(maTk);

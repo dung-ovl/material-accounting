@@ -10,7 +10,7 @@ import {
 import { LoginDto } from '../dtos';
 import { Public } from 'src/middleware/auth.public';
 
-@Controller('users')
+@Controller('nguoidung')
 export class UsersController {
   constructor(
     private readonly userService: UsersService,
@@ -25,6 +25,7 @@ export class UsersController {
     const payload = { username: auth.tenDangNhap, sub: auth.hoTen };
     return {
       access_token: await this.jwtService.signAsync(payload),
+      data: auth,
     };
   }
 

@@ -9,6 +9,7 @@ import { JWTConfig } from 'jwt_config';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from './middleware/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { DepartmentsModule } from './departments/departments.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { APP_GUARD } from '@nestjs/core';
       secret: JWTConfig.secret,
       signOptions: { expiresIn: JWTConfig.expiresIn },
     }),
+    DepartmentsModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,5 +1,5 @@
+import { Bophan } from 'src/departments/Bophan.entity';
 import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
-import { Bophan } from '../../entities/Bophan.entity';
 
 @Index('FK_ND_BP', ['maBoPhan'], {})
 @Entity('nguoidung', { schema: 'ketoan' })

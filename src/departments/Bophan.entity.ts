@@ -1,6 +1,6 @@
+import { Nguoidung } from 'src/users/Nguoidung.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
-import { Nguoidung } from '../src/users/Nguoidung.entity';
-import { Nhanvien } from './Nhanvien.entity';
+import { Nhanvien } from '../../entities/Nhanvien.entity';
 
 @Entity('bophan', { schema: 'ketoan' })
 export class Bophan {

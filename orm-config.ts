@@ -10,6 +10,7 @@ const config: MysqlConnectionOptions = {
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: false, // false để khi bạn thay đổi trong entities nó sẽ không tự update DB
   dropSchema: false,
+  logging: [/*'query',*/ 'error'],
 };
 
 export default config;
