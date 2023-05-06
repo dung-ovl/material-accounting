@@ -9,7 +9,10 @@ import {
 } from '@nestjs/common';
 import { LoginDto } from '../dtos';
 import { Public } from 'src/middleware/auth.public';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('nguoidung')
 @Controller('nguoidung')
 export class UsersController {
   constructor(

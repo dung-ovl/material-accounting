@@ -13,7 +13,10 @@ import { AccountsService } from '../services/accounts.service';
 import { CreateAccountDto, UpdateAccountDto } from '../dtos/index';
 import { Taikhoan } from '../Taikhoan.entity';
 import { Public } from 'src/middleware/auth.public';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('taikhoan')
 @Controller('taikhoan')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
