@@ -13,7 +13,10 @@ import { DepartmentsService } from '../services/departments.service';
 import { CreateDepartmentDto, UpdateDepartmentDto } from '../dtos';
 import { Bophan } from '../Bophan.entity';
 import { Public } from 'src/middleware/auth.public';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('bophan')
 @Controller('bophan')
 export class DepartmentsController {
   constructor(private readonly departmentsService: DepartmentsService) {}
