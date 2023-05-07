@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { AccountsService } from '../services/accounts.service';
 import { CreateAccountDto, UpdateAccountDto } from '../dtos/index';
-import { Taikhoan } from '../Taikhoan.entity';
+import { Taikhoan } from '../../../entities/Taikhoan.entity';
 import { Public } from 'src/middleware/auth.public';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 

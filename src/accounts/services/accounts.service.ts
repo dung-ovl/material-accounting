@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Taikhoan } from '../Taikhoan.entity';
+import { Taikhoan } from '../../../entities/Taikhoan.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAccountDto, UpdateAccountDto } from '../dtos';

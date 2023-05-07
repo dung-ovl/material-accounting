@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { DepartmentsService } from '../services/departments.service';
 import { CreateDepartmentDto, UpdateDepartmentDto } from '../dtos';
-import { Bophan } from '../Bophan.entity';
+import { Bophan } from '../../../entities/Bophan.entity';
 import { Public } from 'src/middleware/auth.public';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
@@ -28,9 +28,9 @@ export class DepartmentsController {
   }
 
   @Public()
-  @Get('/:maTk')
-  async getById(@Param('maTk') maTk: string) {
-    const acc = await this.departmentsService.findOne(maTk);
+  @Get('/:maBoPhan')
+  async getById(@Param('maBoPhan') maBoPhan: string) {
+    const acc = await this.departmentsService.findOne(maBoPhan);
     if (acc == null) throw new NotFoundException();
     return acc;
   }
@@ -47,8 +47,8 @@ export class DepartmentsController {
     return await this.departmentsService.update(dto);
   }
 
-  @Delete('/:maTk')
-  async delete(@Param('maTk') maTk: string) {
-    return await this.departmentsService.remove(maTk);
+  @Delete('/:maBoPhan')
+  async delete(@Param('maBoPhan') maBoPhan: string) {
+    return await this.departmentsService.remove(maBoPhan);
   }
 }

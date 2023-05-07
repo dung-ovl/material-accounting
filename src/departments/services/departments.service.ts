@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Bophan } from '../Bophan.entity';
+import { Bophan } from '../../../entities/Bophan.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateDepartmentDto, UpdateDepartmentDto } from '../dtos';

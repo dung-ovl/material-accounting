@@ -10,6 +10,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from './middleware/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { DepartmentsModule } from './departments/departments.module';
+import { DeliverymansModule } from './deliverymans/deliveryman.module';
+import { RecipientsModule } from './recipients/recipient.module';
+import { SuppliersModule } from './suppliers/supplier.module';
+import { StaffsModule } from './staffs/staff.module';
 
 @Module({
   imports: [
@@ -22,6 +26,10 @@ import { DepartmentsModule } from './departments/departments.module';
       signOptions: { expiresIn: JWTConfig.expiresIn },
     }),
     DepartmentsModule,
+    DeliverymansModule,
+    RecipientsModule,
+    SuppliersModule,
+    StaffsModule,
   ],
   controllers: [AppController],
   providers: [

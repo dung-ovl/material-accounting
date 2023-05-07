@@ -1,4 +1,4 @@
-import { Bophan } from 'src/departments/Bophan.entity';
+import { Bophan } from 'entities/Bophan.entity';
 import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 
 @Index('FK_ND_BP', ['maBoPhan'], {})
