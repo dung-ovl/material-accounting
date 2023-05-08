@@ -12,7 +12,7 @@ import { CtPhieuxuat } from './CtPhieuxuat.entity';
 import { Dudauvattu } from './Dudauvattu.entity';
 import { Donvitinh } from './Donvitinh.entity';
 import { Loaivattu } from './Loaivattu.entity';
-import { Taikhoan } from '../src/accounts/Taikhoan.entity';
+import { Taikhoan } from './Taikhoan.entity';
 
 @Index('FK_VT_DVT', ['maDvt'], {})
 @Index('FK_VT_LoaiVT', ['maLoai'], {})

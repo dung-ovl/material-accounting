@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Bbkiemke } from './Bbkiemke.entity';
 import { Kho } from './Kho.entity';
-import { Bophan } from '../src/departments/Bophan.entity';
+import { Bophan } from './Bophan.entity';
 
 @Index('FK_NhanVien_BoPhan', ['maBoPhan'], {})
 @Entity('nhanvien', { schema: 'ketoan' })

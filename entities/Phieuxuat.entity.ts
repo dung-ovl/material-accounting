@@ -9,7 +9,7 @@ import {
 import { CtPhieuxuat } from './CtPhieuxuat.entity';
 import { Kho } from './Kho.entity';
 import { Nguoinhan } from './Nguoinhan.entity';
-import { Taikhoan } from '../src/accounts/Taikhoan.entity';
+import { Taikhoan } from './Taikhoan.entity';
 import { Congtrinh } from './Congtrinh.entity';
 
 @Index('FK_PX_Kho', ['maKho'], {})

@@ -6,9 +6,9 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { Phieunhap } from '../../entities/Phieunhap.entity';
-import { Phieuxuat } from '../../entities/Phieuxuat.entity';
-import { Vattu } from '../../entities/Vattu.entity';
+import { Phieunhap } from './Phieunhap.entity';
+import { Phieuxuat } from './Phieuxuat.entity';
+import { Vattu } from './Vattu.entity';
 
 @Index('FK_TK_TKMe', ['tkMe'], {})
 @Entity('taikhoan', { schema: 'ketoan' })

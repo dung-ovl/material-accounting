@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { CtPhieunhap } from './CtPhieunhap.entity';
-import { Taikhoan } from '../src/accounts/Taikhoan.entity';
+import { Taikhoan } from './Taikhoan.entity';
 import { Kho } from './Kho.entity';
 import { Nhacungcap } from './Nhacungcap.entity';
 import { Nguoigiao } from './Nguoigiao.entity';
