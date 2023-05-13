@@ -14,6 +14,7 @@ import { DeliverymansModule } from './deliverymans/deliveryman.module';
 import { RecipientsModule } from './recipients/recipient.module';
 import { SuppliersModule } from './suppliers/supplier.module';
 import { StaffsModule } from './staffs/staff.module';
+import {InventoriesModule} from './inventories/inventories.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { StaffsModule } from './staffs/staff.module';
     RecipientsModule,
     SuppliersModule,
     StaffsModule,
+    InventoriesModule
   ],
   controllers: [AppController],
   providers: [
