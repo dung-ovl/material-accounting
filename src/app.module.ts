@@ -14,6 +14,10 @@ import { DeliverymansModule } from './deliverymans/deliveryman.module';
 import { RecipientsModule } from './recipients/recipient.module';
 import { SuppliersModule } from './suppliers/supplier.module';
 import { StaffsModule } from './staffs/staff.module';
+import { ContructionModule } from './contruction/contruction.module';
+import { UnitModule } from './unit/unit.module';
+import { MaterialTypeModule } from './materialtype/materialtype.module';
+import { WarehouseModule } from './warehouse/warehouse.module';
 
 @Module({
   imports: [
@@ -30,6 +34,10 @@ import { StaffsModule } from './staffs/staff.module';
     RecipientsModule,
     SuppliersModule,
     StaffsModule,
+    ContructionModule,
+    UnitModule,
+    MaterialTypeModule,
+    WarehouseModule,
   ],
   controllers: [AppController],
   providers: [
