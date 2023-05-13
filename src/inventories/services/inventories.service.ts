@@ -25,22 +25,24 @@ export class InventoriesService {
     await this.inventoryRepository.delete(soBienBan);
   }
 
-  joinWith(): Promise<JoinedInventoryDto[]> {
+  joinWithTB(): Promise<JoinedInventoryDto[]> {
     return this.inventoryRepository
       .createQueryBuilder('bbkiemke')
-      .leftJoin('bbkiemke.truongBan2', 'tb')
-      .leftJoin('bbkiemke.uyVien', 'uv1')
-      .leftJoin('bbkiemke.uyVien3', 'uv2')
+      .leftJoin('bbkiemke.maKho2', 'makho2')
+      .leftJoin('bbkiemke.truongBan2', 'truongBan2')
+      .leftJoin('bbkiemke.uyVien', 'uyVien')
+      .leftJoin('bbkiemke.uyVien3', 'uyVien3')
       .select([
         'bbkiemke.soBienBan AS soBienBan',
         'bbkiemke.ngayLap AS ngayLap',
         'bbkiemke.maKho AS maKho',
+        'makho2.tenKho AS tenKho',
         'bbkiemke.truongBan AS truongBan',
         'bbkiemke.uyVien1 AS uyVien1',
-        'bbkiemke.uyVien2 AS uyVien2' ,
-        'tb.tenNv AS tenTruongBan',
-        'uv1.tenNv AS tenUyVien1',
-        'uv2.tenNv AS tenUyVien2',
+        'bbkiemke.uyVien2 AS uyVien2',
+        'truongBan2.tenNv AS tenTruongBan',
+        'uyVien.tenNv AS tenUyVien1',
+        'uyVien3.tenNv AS tenUyVien2'
       ])
       .getRawMany();
   }
@@ -62,6 +64,7 @@ export class InventoriesService {
     newInv.maKho = dto.maKho;
     newInv.truongBan = dto.truongBan;
     newInv.uyVien1 = dto.uyVien1;
+    newInv.uyVien2 = dto.uyVien2;
 
     const errors = await validate(newInv);
     if (errors.length > 0) return errors;

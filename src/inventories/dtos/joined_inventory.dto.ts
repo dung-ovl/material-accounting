@@ -33,5 +33,5 @@ export class JoinedInventoryDto {
   readonly tenUyVien2: string;
 
   @ApiProperty({required: false})
-  readonly maKho2: string;
+  readonly tenKho: string;
 }

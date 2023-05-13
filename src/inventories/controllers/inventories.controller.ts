@@ -27,18 +27,11 @@ export class InventoriesController {
     return await this.inventoriesService.findAll();
   }
 
-  @Public()
-  @Get('/:soBienBan')
-  async getById(@Param('soBienBan') soBienBan: string) {
-    const acc = await this.inventoriesService.findOne(soBienBan);
-    if (acc == null) throw new NotFoundException();
-    return acc;
-  }
 
   @Public()
   @Get('/join')
   async getWithJoin() {
-    return await this.inventoriesService.joinWith();
+    return await this.inventoriesService.joinWithTB();
   }
 
   @Post()
@@ -54,7 +47,7 @@ export class InventoriesController {
   }
 
   @Delete('/:soBienBan')
-  async delete(@Param('maTk') maTk: string) {
-    return await this.inventoriesService.remove(maTk);
+  async delete(@Param('soBienBan') soBienBan: string) {
+    return await this.inventoriesService.remove(soBienBan);
   }
 }

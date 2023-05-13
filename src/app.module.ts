@@ -15,6 +15,8 @@ import { RecipientsModule } from './recipients/recipient.module';
 import { SuppliersModule } from './suppliers/supplier.module';
 import { StaffsModule } from './staffs/staff.module';
 import {InventoriesModule} from './inventories/inventories.module';
+import { DetailInventoriesModule } from './detail_inventories/detail_inventories.module';
+import { ReceiptModule } from './receipt/receipt.module';
 
 @Module({
   imports: [
@@ -31,7 +33,9 @@ import {InventoriesModule} from './inventories/inventories.module';
     RecipientsModule,
     SuppliersModule,
     StaffsModule,
-    InventoriesModule
+    InventoriesModule,
+    DetailInventoriesModule,
+    ReceiptModule
   ],
   controllers: [AppController],
   providers: [
