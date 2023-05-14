@@ -2,7 +2,7 @@ import { Injectable, Query } from '@nestjs/common';
 import { Phieunhap } from '../../../entities/Phieunhap.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateDetailReceiptDto , UpdateDetailReceiptDto } from '../dtos';
+import { CreateDetailReceiptDto , UpdateDetailReceiptDto, QueryReceiptDto } from '../dtos';
 import { ValidationError, validate } from 'class-validator';
 import { JoinedDetailReceiptDto } from '../dtos/joined_detail_receipt.dto';
 import { CtPhieunhap } from 'entities/CtPhieunhap.entity';
@@ -22,8 +22,9 @@ export class DetailReceiptService {
     await this.receiptRepository.delete(soPhieu);
   }
 
-  getByChart(params: any): [string, string[]] {
-    const {Thang, Nam} = params;
+  getByChart(params: QueryReceiptDto): Promise<JoinedDetailReceiptDto[]> {
+    const Thang = params.Thang
+    const Nam = params.Nam
     return this.receiptRepository
       .createQueryBuilder('ct_phieunhap')
       .leftJoin('ct_phieunhap.soPhieu2', 'soPhieu2')
@@ -32,14 +33,33 @@ export class DetailReceiptService {
         'maVt2.tenVt AS tenVt',
         'SUM(ct_phieunhap.thanhTien) AS tongTT'
       ])
-      .where('MONTH(soPhieu2.ngayNhap = :Thang', {Thang})
-      .andWhere('YEAR(soPhieu2.ngayNhap = :Nam)', {Nam})
+      .where('MONTH(soPhieu2.ngayNhap) = :Thang', {Thang})
+      .andWhere('YEAR(soPhieu2.ngayNhap) = :Nam', {Nam})
       .groupBy('ct_phieunhap.maVt')
-      .getQueryAndParameters();
+      .getRawMany();
   }
 
-  getByDay(params: any): Promise<JoinedDetailReceiptDto[]> {
-    const {MaKho, Ngay} = params;
+  getByDay(params: QueryReceiptDto): Promise<JoinedDetailReceiptDto[]> {
+    const MaKho = params.MaKho
+    const Ngay = params.Ngay
+    return this.receiptRepository
+      .createQueryBuilder('ct_phieunhap')
+      .leftJoin('ct_phieunhap.soPhieu2', 'soPhieu2')
+      .select([
+        'ct_phieunhap.maVt AS maVt',
+        'SUM(ct_phieunhap.slThucTe) AS tongSl',
+        'SUM(ct_phieunhap.thanhTien) AS tongTT',
+      ])
+      .where('soPhieu2.maKho = :MaKho', {MaKho})
+      .andWhere('soPhieu2.ngayNhap <= :Ngay', {Ngay})
+      .groupBy('ct_phieunhap.maVt')
+      .getRawMany();
+  }
+
+  getAllByMonth(params: QueryReceiptDto): Promise<JoinedDetailReceiptDto[]> {
+    const Thang = params.Thang;
+    const MaKho = params.MaKho
+    const Nam = params.Nam
     return this.receiptRepository
       .createQueryBuilder('ct_phieunhap')
       .leftJoin('ct_phieunhap.soPhieu2', 'soPhieu2')
@@ -48,31 +68,19 @@ export class DetailReceiptService {
         'SUM(ct_phieunhap.slThucTe) AS tongSl',
         'SUM(ct_phieunhap.thanhTien) AS tongTT'
       ])
-      .where('soPhieu2.maKho = :maKho', {MaKho})
-      .andWhere('soPhieu2.ngayNhap <= :ngayNhap)', {Ngay})
+      .where('soPhieu2.maKho = :MaKho', {MaKho})
+      .andWhere('MONTH(soPhieu2.ngayNhap) = :Thang', {Thang})
+      .andWhere('YEAR(soPhieu2.ngayNhap) = :Nam', {Nam})
       .groupBy('ct_phieunhap.maVt')
       .getRawMany();
   }
 
-  getAllByMonth(params: any): Promise<JoinedDetailReceiptDto[]> {
-    const {MaKho, Thang, Nam} = params;
-    return this.receiptRepository
-      .createQueryBuilder('ct_phieunhap')
-      .leftJoin('ct_phieunhap.soPhieu2', 'soPhieu2')
-      .select([
-        'ct_phieunhap.maVt AS maVt',
-        'SUM(ct_phieunhap.slThucTe) AS tongSl',
-        'SUM(ct_phieunhap.thanhTien) AS tongTT'
-      ])
-      .where('soPhieu2.maKho = :maKho', {MaKho})
-      .andWhere('MONTH(soPhieu2.ngayNhap = :Thang', {Thang})
-      .andWhere('YEAR(soPhieu2.ngayNhap = :Nam)', {Nam})
-      .groupBy('ct_phieunhap.maVt')
-      .getRawMany();
-  }
-
-  getByMonth(params: any): Promise<JoinedDetailReceiptDto[]> {
-    const { MaVT, MaKho, NgayBD, Thang, Nam } = params;
+  getByMonth(params: QueryReceiptDto): Promise<JoinedDetailReceiptDto[]> {
+    const MaKho = params.MaKho
+    const NgayBD = params.NgayBD
+    const MaVT = params.MaVT
+    const Thang = params.Thang
+    const Nam = params.Nam
     return this.receiptRepository
       .createQueryBuilder('ct_phieunhap')
       .leftJoin('ct_phieunhap.soPhieu2', 'soPhieu2')
@@ -85,16 +93,19 @@ export class DetailReceiptService {
         'soPhieu2.lyDo AS lyDo',
         'soPhieu2.tkCo as maTK',
       ])
-      .where('ct_phieunhap.maVt = :maVt', {MaVT})
-      .andWhere('soPhieu2.maKho = :maKho', {MaKho})
-      .andWhere('soPhieu2.ngayNhap >= :ngayNhap', {NgayBD})
-      .andWhere('MONTH(soPhieu2.ngayNhap = :Thang', {Thang})
-      .andWhere('YEAR(soPhieu2.ngayNhap = :Nam)', {Nam})
+      .where('ct_phieunhap.maVt = :MaVT', {MaVT})
+      .andWhere('soPhieu2.maKho = :MaKho', {MaKho})
+      .andWhere('soPhieu2.ngayNhap >= :NgayBD', {NgayBD})
+      .andWhere('MONTH(soPhieu2.ngayNhap) = :Thang', {Thang})
+      .andWhere('YEAR(soPhieu2.ngayNhap) = :Nam', {Nam})
       .getRawMany();
   }
 
-  getBy(params: any): Promise<JoinedDetailReceiptDto[]> {
-    const { MaVT, MaKho, NgayBD, NgayKT } = params;
+  getBy(params: QueryReceiptDto): Promise<JoinedDetailReceiptDto[]> {
+    const MaKho = params.MaKho
+    const NgayBD = params.NgayBD
+    const MaVT = params.MaVT
+    const NgayKT = params.NgayKT
     return this.receiptRepository
       .createQueryBuilder('ct_phieunhap')
       .leftJoin('ct_phieunhap.soPhieu2', 'soPhieu2')
@@ -106,10 +117,10 @@ export class DetailReceiptService {
         'ct_phieunhap.thanhTien AS thanhTien',
         'soPhieu2.lyDo AS lyDo',
       ])
-      .where('ct_phieunhap.maVt = :maVt', {MaVT})
-      .andWhere('soPhieu2.maKho = :maKho', {MaKho})
-      .andWhere('soPhieu2.ngayNhap >= :ngayNhap', {NgayBD})
-      .andWhere('soPhieu2.ngayNhap <= :ngayNhap', {NgayKT})
+      .where('ct_phieunhap.maVt = :MaVT', {MaVT})
+      .andWhere('soPhieu2.maKho = :MaKho', {MaKho})
+      .andWhere('soPhieu2.ngayNhap >= :NgayBD', {NgayBD})
+      .andWhere('soPhieu2.ngayNhap <= :NgayKT', {NgayKT})
       .getRawMany();
   }
 

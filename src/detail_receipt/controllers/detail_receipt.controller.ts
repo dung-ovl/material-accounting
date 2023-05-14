@@ -11,7 +11,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { DetailReceiptService } from '../services/detail_receipt.service';
-import { CreateDetailReceiptDto, UpdateDetailReceiptDto } from '../dtos/index';
+import { CreateDetailReceiptDto, UpdateDetailReceiptDto, QueryReceiptDto } from '../dtos/index';
 import { Public } from 'src/middleware/auth.public';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CtPhieunhap } from 'entities/CtPhieunhap.entity';
@@ -30,32 +30,31 @@ export class DetailReceiptController {
 
   @Public()
   @Get('/chart')
-  async getWithChart(@Query() params) {
-    console.log(this.detReceiptService.getByChart(params));
+  async getWithChart(@Query() params: QueryReceiptDto) {
     return this.detReceiptService.getByChart(params);
   }
 
   @Public()
   @Get('/ctpnngay')
-  async getWithDay(@Query() params) {
+  async getWithDay(@Query() params: QueryReceiptDto) {
     return await this.detReceiptService.getByDay(params);
   }
 
   @Public()
   @Get('/allctpnthang')
-  async getWithMonth(@Query() params) {
+  async getWithMonth(@Query() params: QueryReceiptDto) {
     return await this.detReceiptService.getAllByMonth(params);
   }
 
   @Public()
   @Get('/ctpnthang')
-  async getAllWithMonth(@Query() params) {
+  async getAllWithMonth(@Query() params: QueryReceiptDto) {
     return await this.detReceiptService.getAllByMonth(params);
   }
 
   @Public()
   @Get('/ctpn')
-  async getBy(@Query() params) {
+  async getBy(@Query() params: QueryReceiptDto) {
     return await this.detReceiptService.getBy(params);
   }
 

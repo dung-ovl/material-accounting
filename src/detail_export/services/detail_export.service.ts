@@ -1,10 +1,9 @@
-import { Injectable, Query } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateDetailExportDto , UpdateDetailExportDto } from '../dtos';
+import { CreateDetailExportDto , UpdateDetailExportDto, QueryExportDto } from '../dtos';
 import { ValidationError, validate } from 'class-validator';
 import { JoinedDetailExportDto } from '../dtos/joined_detail_export.dto';
-import { CtPhieunhap } from 'entities/CtPhieunhap.entity';
 import { CtPhieuxuat } from 'entities/CtPhieuxuat.entity';
 
 @Injectable()
@@ -22,7 +21,7 @@ export class DetailExportService {
     await this.exportRepository.delete(soPhieu);
   }
 
-  getByChart(params: any): [string, string[]] {
+  getByChart(params: QueryExportDto): Promise<JoinedDetailExportDto[]> {
     const {Thang, Nam} = params;
     return this.exportRepository
       .createQueryBuilder('ct_phieuxuat')
@@ -32,13 +31,13 @@ export class DetailExportService {
         'maVt2.tenVt AS tenVt',
         'SUM(ct_phieuxuat.thanhTien) AS tongTT'
       ])
-      .where('MONTH(soPhieu2.ngayXuat = :Thang', {Thang})
-      .andWhere('YEAR(soPhieu2.ngayXuat = :Nam)', {Nam})
+      .where('MONTH(soPhieu2.ngayXuat) = :Thang', {Thang})
+      .andWhere('YEAR(soPhieu2.ngayXuat) = :Nam', {Nam})
       .groupBy('ct_phieuxuat.maVt')
-      .getQueryAndParameters();
+      .getRawMany();
   }
 
-  getByDay(params: any): Promise<JoinedDetailExportDto[]> {
+  getByDay(params: QueryExportDto): Promise<JoinedDetailExportDto[]> {
     const {MaKho, Ngay} = params;
     return this.exportRepository
       .createQueryBuilder('ct_phieuxuat')
@@ -48,13 +47,13 @@ export class DetailExportService {
         'SUM(ct_phieuxuat.slThucTe) AS tongSl',
         'SUM(ct_phieuxuat.thanhTien) AS tongTT'
       ])
-      .where('soPhieu2.maKho = :maKho', {MaKho})
-      .andWhere('soPhieu2.ngayXuat <= :ngayXuat)', {Ngay})
+      .where('soPhieu2.maKho = :MaKho', {MaKho})
+      .andWhere('soPhieu2.ngayXuat <= :Ngay', {Ngay})
       .groupBy('ct_phieuxuat.maVt')
       .getRawMany();
   }
 
-  getAllByMonth(params: any): Promise<JoinedDetailExportDto[]> {
+  getAllByMonth(params: QueryExportDto): Promise<JoinedDetailExportDto[]> {
     const {MaKho, Thang, Nam} = params;
     return this.exportRepository
       .createQueryBuilder('ct_phieuxuat')
@@ -64,14 +63,14 @@ export class DetailExportService {
         'SUM(ct_phieuxuat.slThucTe) AS tongSl',
         'SUM(ct_phieuxuat.thanhTien) AS tongTT'
       ])
-      .where('soPhieu2.maKho = :maKho', {MaKho})
-      .andWhere('MONTH(soPhieu2.ngayXuat = :Thang', {Thang})
-      .andWhere('YEAR(soPhieu2.ngayXuat = :Nam)', {Nam})
+      .where('soPhieu2.maKho = :MaKho', {MaKho})
+      .andWhere('MONTH(soPhieu2.ngayXuat) = :Thang', {Thang})
+      .andWhere('YEAR(soPhieu2.ngayXuat) = :Nam', {Nam})
       .groupBy('ct_phieuxuat.maVt')
       .getRawMany();
   }
 
-  getByMonth(params: any): Promise<JoinedDetailExportDto[]> {
+  getByMonth(params: QueryExportDto): Promise<JoinedDetailExportDto[]> {
     const { MaVT, MaKho, NgayBD, Thang, Nam } = params;
     return this.exportRepository
       .createQueryBuilder('ct_phieuxuat')
@@ -85,15 +84,15 @@ export class DetailExportService {
         'soPhieu2.lyDo AS lyDo',
         'soPhieu2.tkNo as maTK',
       ])
-      .where('ct_phieuxuat.maVt = :maVt', {MaVT})
-      .andWhere('soPhieu2.maKho = :maKho', {MaKho})
-      .andWhere('soPhieu2.ngayXuat >= :ngayXuat', {NgayBD})
-      .andWhere('MONTH(soPhieu2.ngayXuat = :Thang', {Thang})
-      .andWhere('YEAR(soPhieu2.ngayXuat = :Nam)', {Nam})
+      .where('ct_phieuxuat.maVt = :MaVT', {MaVT})
+      .andWhere('soPhieu2.maKho = :MaKho', {MaKho})
+      .andWhere('soPhieu2.ngayXuat >= :NgayBD', {NgayBD})
+      .andWhere('MONTH(soPhieu2.ngayXuat) = :Thang', {Thang})
+      .andWhere('YEAR(soPhieu2.ngayXuat) = :Nam', {Nam})
       .getRawMany();
   }
 
-  getBy(params: any): Promise<JoinedDetailExportDto[]> {
+  getBy(params: QueryExportDto): Promise<JoinedDetailExportDto[]> {
     const { MaVT, MaKho, NgayBD, NgayKT } = params;
     return this.exportRepository
       .createQueryBuilder('ct_phieuxuat')
@@ -106,10 +105,10 @@ export class DetailExportService {
         'ct_phieuxuat.thanhTien AS thanhTien',
         'soPhieu2.lyDo AS lyDo',
       ])
-      .where('ct_phieuxuat.maVt = :maVt', {MaVT})
-      .andWhere('soPhieu2.maKho = :maKho', {MaKho})
-      .andWhere('soPhieu2.ngayXuat >= :ngayXuat', {NgayBD})
-      .andWhere('soPhieu2.ngayXuat <= :ngayXuat', {NgayKT})
+      .where('ct_phieuxuat.maVt = :MaVT', {MaVT})
+      .andWhere('soPhieu2.maKho = :MaKho', {MaKho})
+      .andWhere('soPhieu2.ngayXuat >= :NgayBD', {NgayBD})
+      .andWhere('soPhieu2.ngayXuat <= :NgayKT', {NgayKT})
       .getRawMany();
   }
 
@@ -160,8 +159,8 @@ export class DetailExportService {
   }
 
   async update(dto: UpdateDetailExportDto) {
-    const soPhieu = dto.soPhieu;
-    return await this.exportRepository.update({ soPhieu }, dto);
+    const maSo = dto.maSo;
+    return await this.exportRepository.update({ maSo }, dto);
   }
 
 }
