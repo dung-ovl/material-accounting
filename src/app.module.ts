@@ -18,6 +18,8 @@ import { ContructionModule } from './contruction/contruction.module';
 import { UnitModule } from './unit/unit.module';
 import { MaterialTypeModule } from './materialtype/materialtype.module';
 import { WarehouseModule } from './warehouse/warehouse.module';
+import { MaterialModule } from './material/material.module';
+import { SurMaterialModule } from './surmaterial/surmaterial.module';
 
 @Module({
   imports: [
@@ -38,6 +40,8 @@ import { WarehouseModule } from './warehouse/warehouse.module';
     UnitModule,
     MaterialTypeModule,
     WarehouseModule,
+    MaterialModule,
+    SurMaterialModule,
   ],
   controllers: [AppController],
   providers: [

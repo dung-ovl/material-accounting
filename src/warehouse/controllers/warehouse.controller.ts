@@ -12,11 +12,7 @@ import { WarehouseService } from '../services/warehouse.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/middleware/auth.public';
 import { Kho } from 'entities/Kho.entity';
-import {
-  CreateWarehouseDto,
-  UpdateWarehouseDto,
-  JoinedWarehouseDto,
-} from '../dtos';
+import { CreateWarehouseDto, UpdateWarehouseDto } from '../dtos';
 
 @ApiBearerAuth()
 @ApiTags('kho')
@@ -49,7 +45,7 @@ export class WarehouseController {
   }
 
   @Delete('/:MaKho')
-  async delete(@Param('maKho') maKho: string) {
+  async delete(@Param('MaKho') maKho: string) {
     return await this.warehouseService.remove(maKho);
   }
 }

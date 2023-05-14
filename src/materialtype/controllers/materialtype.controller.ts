@@ -15,8 +15,8 @@ import { Public } from 'src/middleware/auth.public';
 import { Loaivattu } from 'entities/Loaivattu.entity';
 
 @ApiBearerAuth()
-@ApiTags('loaivatu')
-@Controller('loaivatu')
+@ApiTags('loaivattu')
+@Controller('loaivattu')
 export class MaterialTypeController {
   constructor(private readonly materialTypeService: MaterialTypeService) {}
 

@@ -37,7 +37,7 @@ export class UnitService {
 
     const newUnit = new Donvitinh();
     newUnit.maDvt = dto.maDvt;
-    newUnit.maDvt = dto.tenDvt;
+    newUnit.tenDvt = dto.tenDvt;
 
     const errors = await validate(newUnit);
     if (errors.length > 0) return errors;

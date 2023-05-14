@@ -27,7 +27,7 @@ export class UnitController {
   }
 
   @Delete('/:MaDVT')
-  async delete(@Param('maDVT') maDVT: string) {
+  async delete(@Param('MaDVT') maDVT: string) {
     return await this.unitService.remove(maDVT);
   }
 

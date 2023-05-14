@@ -37,7 +37,8 @@ export class WarehouseService {
         'kho.tenKho AS tenKho',
         'kho.diaChi AS diaChi',
         'kho.sdt AS sdt',
-        'nv.tenNV AS tenNV',
+        'kho.maThuKho AS maThuKho',
+        'nv.tenNv AS tenNV',
       ])
       .getRawMany();
   }

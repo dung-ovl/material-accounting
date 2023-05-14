@@ -27,7 +27,7 @@ export class ContructionController {
   }
 
   @Delete('/:MaCongTrinh')
-  async delete(@Param('maCongTrinh') maCongTrinh: string) {
+  async delete(@Param('MaCongTrinh') maCongTrinh: string) {
     return await this.contructionService.remove(maCongTrinh);
   }
 
