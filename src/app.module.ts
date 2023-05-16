@@ -23,7 +23,7 @@ import { SurMaterialModule } from './surmaterial/surmaterial.module';
 import { InventoriesModule } from './inventories/inventories.module';
 import { DetailInventoriesModule } from './detail_inventories/detail_inventories.module';
 import { ReceiptModule } from './receipt/receipt.module';
-import { DetailReceiptModule } from './detail_receipt/detail_receipt.module'
+import { DetailReceiptModule } from './detail_receipt/detail_receipt.module';
 import { ExportModule } from './export/export.module';
 import { DetailExportModule } from './detail_export/detail_export.module';
 
