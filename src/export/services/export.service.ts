@@ -31,7 +31,7 @@ export class ExportService {
       .select([
         'phieuxuat.soPhieu AS soPhieu',
         'phieuxuat.ngayXuat AS ngayXuat',
-        'phieunhap.maCongTrinh AS maCongTrinh',
+        'phieuxuat.maCongTrinh AS maCongTrinh',
         'maCongTrinh2.tenCongTrinh AS tenCongTrinh',
         'maCongTrinh2.diaChi AS diaChiCt',
         'phieuxuat.maNguoiNhan AS maNguoiNhan',
@@ -39,10 +39,10 @@ export class ExportService {
         'phieuxuat.maKho AS maKho',
         'maKho2.tenKho AS tenKho',
         'maKho2.diaChi AS diaChiKho',
-        'phieunhap.lyDo AS lyDo',
-        'phieunhap.tkCo AS tkCo',
-        'phieunhap.tongTien AS tongTien',
-        'phieunhap.chungTuLq AS chungTuLq',
+        'phieuxuat.lyDo AS lyDo',
+        'phieuxuat.tkNo AS tkNo',
+        'phieuxuat.tongTien AS tongTien',
+        'phieuxuat.chungTuLq AS chungTuLq',
       ])
       .getRawMany();
   }
@@ -51,8 +51,8 @@ export class ExportService {
     // check uniqueness of username/email
     const { soPhieu } = dto;
     const qb = await this.exportRepository
-      .createQueryBuilder('phieunhap')
-      .where('phieunhap.soPhieu = :soPhieu', { soPhieu });
+      .createQueryBuilder('phieuxuat')
+      .where('phieuxuat.soPhieu = :soPhieu', { soPhieu });
 
     const inv = await qb.getOne();
 
