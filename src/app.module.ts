@@ -20,6 +20,12 @@ import { MaterialTypeModule } from './materialtype/materialtype.module';
 import { WarehouseModule } from './warehouse/warehouse.module';
 import { MaterialModule } from './material/material.module';
 import { SurMaterialModule } from './surmaterial/surmaterial.module';
+import { InventoriesModule } from './inventories/inventories.module';
+import { DetailInventoriesModule } from './detail_inventories/detail_inventories.module';
+import { ReceiptModule } from './receipt/receipt.module';
+import { DetailReceiptModule } from './detail_receipt/detail_receipt.module'
+import { ExportModule } from './export/export.module';
+import { DetailExportModule } from './detail_export/detail_export.module';
 
 @Module({
   imports: [
@@ -42,6 +48,12 @@ import { SurMaterialModule } from './surmaterial/surmaterial.module';
     WarehouseModule,
     MaterialModule,
     SurMaterialModule,
+    InventoriesModule,
+    DetailInventoriesModule,
+    ReceiptModule,
+    DetailReceiptModule,
+    ExportModule,
+    DetailExportModule,
   ],
   controllers: [AppController],
   providers: [
