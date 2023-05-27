@@ -20,46 +20,46 @@ export class WarehouseService {
     return this.warehouseRepository.find();
   }
 
-  findOne(maKho: string): Promise<Kho | null> {
-    return this.warehouseRepository.findOneBy({ maKho });
+  findOne(MaKho: string): Promise<Kho | null> {
+    return this.warehouseRepository.findOneBy({ MaKho });
   }
 
-  async remove(maKho: string): Promise<void> {
-    await this.warehouseRepository.delete(maKho);
+  async remove(MaKho: string): Promise<void> {
+    await this.warehouseRepository.delete(MaKho);
   }
 
   joinWithCT(): Promise<JoinedWarehouseDto[]> {
     return this.warehouseRepository
       .createQueryBuilder('kho')
-      .leftJoinAndSelect('kho.maThuKho2', 'nv')
+      .leftJoinAndSelect('kho.MaThuKho2', 'nv')
       .select([
-        'kho.maKho AS maKho',
-        'kho.tenKho AS tenKho',
-        'kho.diaChi AS diaChi',
-        'kho.sdt AS sdt',
-        'kho.maThuKho AS maThuKho',
-        'nv.tenNv AS tenNV',
+        'kho.MaKho AS MaKho',
+        'kho.TenKho AS TenKho',
+        'kho.DiaChi AS DiaChi',
+        'kho.SDT AS SDT',
+        'kho.MaThuKho AS MaThuKho',
+        'nv.TenNV AS TenNV',
       ])
       .getRawMany();
   }
 
   async create(dto: CreateWarehouseDto): Promise<Kho | ValidationError[]> {
     // check uniqueness of username/email
-    const { maKho } = dto;
+    const { MaKho } = dto;
     const qb = await this.warehouseRepository
       .createQueryBuilder('kho')
-      .where('kho.MaKho = :maKho', { maKho });
+      .where('kho.MaKho = :MaKho', { MaKho });
 
     const find = await qb.getOne();
 
     if (find) return [];
 
     const newWarehouse = new Kho();
-    newWarehouse.maKho = dto.maKho;
-    newWarehouse.tenKho = dto.tenKho;
-    newWarehouse.diaChi = dto.diaChi;
-    newWarehouse.sdt = dto.sdt;
-    newWarehouse.maThuKho = dto.maThuKho;
+    newWarehouse.MaKho = dto.MaKho;
+    newWarehouse.TenKho = dto.TenKho;
+    newWarehouse.DiaChi = dto.DiaChi;
+    newWarehouse.SDT = dto.SDT;
+    newWarehouse.MaThuKho = dto.MaThuKho;
 
     const errors = await validate(newWarehouse);
     if (errors.length > 0) return errors;
@@ -67,7 +67,7 @@ export class WarehouseService {
   }
 
   async update(dto: UpdateWarehouseDto) {
-    const maKho = dto.maKho;
-    return await this.warehouseRepository.update({ maKho }, dto);
+    const MaKho = dto.MaKho;
+    return await this.warehouseRepository.update({ MaKho }, dto);
   }
 }

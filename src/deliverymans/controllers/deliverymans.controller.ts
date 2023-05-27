@@ -44,8 +44,8 @@ export class DeliveryMansController {
     return await this.deliveryMansService.update(dto);
   }
 
-  @Delete('/:maNguoiGiao')
-  async delete(@Param('maNguoiGiao') maNguoiGiao: string) {
-    return await this.deliveryMansService.remove(maNguoiGiao);
+  @Delete('/:MaNguoiGiao')
+  async delete(@Param('MaNguoiGiao') MaNguoiGiao: string) {
+    return await this.deliveryMansService.remove(MaNguoiGiao);
   }
 }

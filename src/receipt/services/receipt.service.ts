@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Phieunhap } from '../../../entities/Phieunhap.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateReceiptDto , UpdateReceiptDto } from '../dtos';
+import { CreateReceiptDto, UpdateReceiptDto } from '../dtos';
 import { ValidationError, validate } from 'class-validator';
 import { JoinedReceiptDto } from '../dtos/joined_receipt.dto';
 
@@ -17,55 +17,55 @@ export class ReceiptService {
     return this.receiptRepository.find();
   }
 
-  async remove(soPhieu: string): Promise<void> {
-    await this.receiptRepository.delete(soPhieu);
+  async remove(SoPhieu: string): Promise<void> {
+    await this.receiptRepository.delete(SoPhieu);
   }
 
   joinWithRec(): Promise<JoinedReceiptDto[]> {
     return this.receiptRepository
       .createQueryBuilder('phieunhap')
-      .leftJoin('phieunhap.maNcc2', 'maNcc2')
-      .leftJoin('phieunhap.maKho2', 'maKho2')
-      .leftJoin('phieunhap.maNguoiGiao2', 'maNguoiGiao2')
+      .leftJoin('phieunhap.MaNCC2', 'MaNCC2')
+      .leftJoin('phieunhap.MaKho2', 'MaKho2')
+      .leftJoin('phieunhap.MaNguoiGiao2', 'MaNguoiGiao2')
       .select([
-        'phieunhap.soPhieu AS soPhieu',
-        'phieunhap.ngayNhap AS ngayNhap',
-        'phieunhap.maNcc AS maNcc',
-        'maNcc2.tenNcc AS tenNcc',
-        'phieunhap.maNguoiGiao AS maNguoiGiao',
-        'maNguoiGiao2.tenNguoiGiao AS tenNguoiGiao',
-        'phieunhap.maKho AS maKho',
-        'maKho2.tenKho AS tenKho',
-        'maKho2.diaChi AS diaChiKho',
-        'phieunhap.lyDo AS lyDo',
-        'phieunhap.tkCo AS tkCo',
-        'phieunhap.tongTien AS tongTien',
-        'phieunhap.chungTuLq AS chungTuLq',
+        'phieunhap.SoPhieu AS SoPhieu',
+        'phieunhap.NgayNhap AS NgayNhap',
+        'phieunhap.MaNCC AS MaNCC',
+        'MaNCC2.TenNCC AS TenNCC',
+        'phieunhap.MaNguoiGiao AS MaNguoiGiao',
+        'MaNguoiGiao2.TenNguoiGiao AS TenNguoiGiao',
+        'phieunhap.MaKho AS MaKho',
+        'MaKho2.TenKho AS TenKho',
+        'MaKho2.DiaChi AS DiaChiKho',
+        'phieunhap.LyDo AS LyDo',
+        'phieunhap.TKCo AS TKCo',
+        'phieunhap.TongTien AS TongTien',
+        'phieunhap.ChungTuLQ AS ChungTuLQ',
       ])
       .getRawMany();
   }
 
   async create(dto: CreateReceiptDto): Promise<Phieunhap | ValidationError[]> {
     // check uniqueness of username/email
-    const { soPhieu } = dto;
+    const { SoPhieu } = dto;
     const qb = await this.receiptRepository
       .createQueryBuilder('phieunhap')
-      .where('phieunhap.soPhieu = :soPhieu', { soPhieu });
+      .where('phieunhap.SoPhieu = :SoPhieu', { SoPhieu });
 
     const inv = await qb.getOne();
 
     if (inv) return [];
 
     const newInv = new Phieunhap();
-    newInv.soPhieu = dto.soPhieu;
-    newInv.ngayNhap = dto.ngayNhap;
-    newInv.maNcc = dto.maNcc;
-    newInv.maNguoiGiao = dto.maNguoiGiao;
-    newInv.maKho = dto.maKho;
-    newInv.lyDo = dto.lyDo;
-    newInv.tkCo = dto.tkCo;
-    newInv.tongTien = dto.tongTien;
-    newInv.chungTuLq = dto.chungTuLq;
+    newInv.SoPhieu = dto.SoPhieu;
+    newInv.NgayNhap = dto.NgayNhap;
+    newInv.MaNCC = dto.MaNCC;
+    newInv.MaNguoiGiao = dto.MaNguoiGiao;
+    newInv.MaKho = dto.MaKho;
+    newInv.LyDo = dto.LyDo;
+    newInv.TKCo = dto.TKCo;
+    newInv.TongTien = dto.TongTien;
+    newInv.ChungTuLQ = dto.ChungTuLQ;
 
     const errors = await validate(newInv);
     if (errors.length > 0) return errors;
@@ -73,11 +73,14 @@ export class ReceiptService {
   }
 
   async update(dto: UpdateReceiptDto) {
-    const soPhieu = dto.soPhieu;
-    return await this.receiptRepository.update({ soPhieu }, dto);
+    const SoPhieu = dto.SoPhieu;
+    return await this.receiptRepository.update({ SoPhieu }, dto);
   }
 
-  async updat2(soPhieu, dto: UpdateReceiptDto) {
-    return await this.receiptRepository.update({ soPhieu }, {tongTien: dto.tongTien});
+  async updat2(SoPhieu, dto: UpdateReceiptDto) {
+    return await this.receiptRepository.update(
+      { SoPhieu },
+      { TongTien: dto.TongTien },
+    );
   }
 }

@@ -4,19 +4,19 @@ import { IsNotEmpty } from 'class-validator';
 export class UpdateMaterialDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maVt: string;
+  readonly MaVT: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenVt: string;
+  readonly TenVT: string;
 
   @ApiProperty({ required: false })
   @IsNotEmpty()
-  readonly maLoai: string;
+  readonly MaLoai: string;
 
   @ApiProperty({ required: false })
-  readonly maDvt: string;
+  readonly MaDVT: string;
 
   @ApiProperty({ required: false })
-  readonly maTk: string;
+  readonly MaTK: string;
 }

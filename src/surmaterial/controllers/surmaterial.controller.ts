@@ -44,8 +44,8 @@ export class SurMaterialController {
   }
 
   @Delete('/:MaSo')
-  async delete(@Param('MaSo') maSo: number) {
-    return await this.surMaterialService.remove(maSo);
+  async delete(@Param('MaSo') MaSo: number) {
+    return await this.surMaterialService.remove(MaSo);
   }
 
   @Public()

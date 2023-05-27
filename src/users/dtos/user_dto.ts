@@ -4,17 +4,17 @@ import { IsNotEmpty } from 'class-validator';
 export class UserDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenDangNhap: string;
+  readonly TenDangNhap: string;
 
   @ApiProperty({ required: false })
-  readonly hoTen: string;
+  readonly HoTen: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly quyen: string;
+  readonly Quyen: string;
 
   @ApiProperty({ required: false })
-  readonly maBoPhan: string | null;
+  readonly MaBoPhan: string | null;
 
   @ApiProperty({ required: false })
   readonly boPhan: [] | null;

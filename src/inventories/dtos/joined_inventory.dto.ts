@@ -4,34 +4,34 @@ import { IsNotEmpty } from 'class-validator';
 export class JoinedInventoryDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly soBienBan: string;
+  readonly SoBienBan: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly ngayLap: string;
+  readonly NgayLap: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maKho: string;
+  readonly MaKho: string;
 
   @ApiProperty({ required: false })
-  readonly truongBan: string;
+  readonly TruongBan: string;
 
   @ApiProperty({ required: false })
-  readonly uyVien1: string;
+  readonly UyVien1: string;
 
   @ApiProperty({required: false})
-  readonly uyVien2: string;
+  readonly UyVien2: string;
 
   @ApiProperty({required: false})
-  readonly tenTruongBan: string;
+  readonly TenTruongBan: string;
 
   @ApiProperty({required: false})
-  readonly tenUyVien1: string;
+  readonly TenUyVien1: string;
 
   @ApiProperty({required: false})
-  readonly tenUyVien2: string;
+  readonly TenUyVien2: string;
 
   @ApiProperty({required: false})
-  readonly tenKho: string;
+  readonly TenKho: string;
 }

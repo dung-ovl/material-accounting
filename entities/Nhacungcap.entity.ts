@@ -5,23 +5,23 @@ import { Phieunhap } from './Phieunhap.entity';
 @Entity('nhacungcap', { schema: 'ketoan' })
 export class Nhacungcap {
   @Column('varchar', { primary: true, name: 'MaNCC', length: 50 })
-  maNcc: string;
+  MaNCC: string;
 
   @Column('varchar', { name: 'TenNCC', length: 50 })
-  tenNcc: string;
+  TenNCC: string;
 
   @Column('varchar', { name: 'DiaChi', length: 100 })
-  diaChi: string;
+  DiaChi: string;
 
   @Column('varchar', { name: 'MaSoThue', length: 50 })
-  maSoThue: string;
+  MaSoThue: string;
 
   @Column('varchar', { name: 'SDT', length: 10 })
-  sdt: string;
+  SDT: string;
 
-  @OneToMany(() => Nguoigiao, (nguoigiao) => nguoigiao.maNcc2)
+  @OneToMany(() => Nguoigiao, (nguoigiao) => nguoigiao.MaNCC2)
   nguoigiaos: Nguoigiao[];
 
-  @OneToMany(() => Phieunhap, (phieunhap) => phieunhap.maNcc2)
+  @OneToMany(() => Phieunhap, (phieunhap) => phieunhap.MaNCC2)
   phieunhaps: Phieunhap[];
 }

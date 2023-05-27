@@ -16,42 +16,42 @@ export class StaffsService {
     return this.recipientRepository.find();
   }
 
-  findOne(maNv: string): Promise<Nhanvien | null> {
-    return this.recipientRepository.findOneBy({ maNv });
+  findOne(MaNV: string): Promise<Nhanvien | null> {
+    return this.recipientRepository.findOneBy({ MaNV });
   }
 
-  async remove(maNv: string): Promise<void> {
-    await this.recipientRepository.delete(maNv);
+  async remove(MaNV: string): Promise<void> {
+    await this.recipientRepository.delete(MaNV);
   }
 
   joinWithCT(): Promise<JoinedStaffDto[]> {
     return this.recipientRepository
       .createQueryBuilder('nhanvien')
-      .leftJoinAndSelect('nhanvien.maBoPhan2', 'bp')
+      .leftJoinAndSelect('nhanvien.MaBoPhan2', 'bp')
       .select([
-        'nhanvien.maNv AS maNv',
-        'nhanvien.tenNv AS tenNv',
-        'nhanvien.maBoPhan AS maBoPhan',
-        'bp.maBoPhan AS tenBoPhan',
+        'nhanvien.MaNV AS MaNV',
+        'nhanvien.TenNV AS TenNV',
+        'nhanvien.MaBoPhan AS MaBoPhan',
+        'bp.MaBoPhan AS TenBoPhan',
       ])
       .getRawMany();
   }
 
   async create(dto: CreateStaffDto): Promise<Nhanvien | ValidationError[]> {
     // check uniqueness of username/email
-    const { maNv } = dto;
+    const { MaNV } = dto;
     const qb = await this.recipientRepository
       .createQueryBuilder('nhanvien')
-      .where('nhanvien.MaNhanVien = :maNv', { maNv });
+      .where('nhanvien.MaNV = :MaNV', { MaNV });
 
     const find = await qb.getOne();
 
     if (find) return [];
 
     const newEmploy = new Nhanvien();
-    newEmploy.maNv = dto.maNv;
-    newEmploy.tenNv = dto.tenNv;
-    newEmploy.maBoPhan = dto.maBoPhan;
+    newEmploy.MaNV = dto.MaNV;
+    newEmploy.TenNV = dto.TenNV;
+    newEmploy.MaBoPhan = dto.MaBoPhan;
 
     const errors = await validate(newEmploy);
     if (errors.length > 0) return errors;
@@ -59,7 +59,7 @@ export class StaffsService {
   }
 
   async update(dto: UpdateStaffDto) {
-    const maNv = dto.maNv;
-    return await this.recipientRepository.update({ maNv }, dto);
+    const MaNV = dto.MaNV;
+    return await this.recipientRepository.update({ MaNV }, dto);
   }
 }

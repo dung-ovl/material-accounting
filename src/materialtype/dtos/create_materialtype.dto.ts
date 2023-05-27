@@ -4,13 +4,13 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateMaterialTypeDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maLoai: string;
+  readonly MaLoai: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenLoai: string;
+  readonly TenLoai: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly moTa: string;
+  readonly MoTa: string;
 }

@@ -4,19 +4,19 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateWarehouseDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maKho: string;
+  readonly MaKho: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenKho: string;
+  readonly TenKho: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly diaChi: string;
+  readonly DiaChi: string;
 
   @ApiProperty({ required: true })
-  readonly sdt: string;
+  readonly SDT: string;
 
   @ApiProperty({ required: false })
-  readonly maThuKho: string;
+  readonly MaThuKho: string;
 }

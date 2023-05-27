@@ -16,33 +16,33 @@ export class SuppliersService {
     return this.accountRepository.find();
   }
 
-  findOne(maNcc: string): Promise<Nhacungcap | null> {
-    return this.accountRepository.findOneBy({ maNcc });
+  findOne(MaNCC: string): Promise<Nhacungcap | null> {
+    return this.accountRepository.findOneBy({ MaNCC });
   }
 
-  async remove(maNcc: string): Promise<void> {
-    await this.accountRepository.delete(maNcc);
+  async remove(MaNCC: string): Promise<void> {
+    await this.accountRepository.delete(MaNCC);
   }
 
   async create(
     dto: CreateSupplierDto,
   ): Promise<Nhacungcap | ValidationError[]> {
     // check uniqueness of username/email
-    const { maNcc } = dto;
+    const { MaNCC } = dto;
     const qb = await this.accountRepository
       .createQueryBuilder('nhacungcap')
-      .where('nhacungcap.MaTK = :maNcc', { maNcc });
+      .where('nhacungcap.MaNCC = :MaNCC', { MaNCC });
 
     const acc = await qb.getOne();
 
     if (acc) return [];
 
     const newSupp = new Nhacungcap();
-    newSupp.maNcc = dto.maNcc;
-    newSupp.tenNcc = dto.tenNcc;
-    newSupp.diaChi = dto.diaChi;
-    newSupp.maSoThue = dto.maSoThue;
-    newSupp.sdt = dto.sdt;
+    newSupp.MaNCC = dto.MaNCC;
+    newSupp.TenNCC = dto.TenNCC;
+    newSupp.DiaChi = dto.DiaChi;
+    newSupp.MaSoThue = dto.MaSoThue;
+    newSupp.SDT = dto.SDT;
 
     const errors = await validate(newSupp);
     if (errors.length > 0) return errors;
@@ -50,7 +50,7 @@ export class SuppliersService {
   }
 
   async update(dto: UpdateSupplierDto) {
-    const maNcc = dto.maNcc;
-    return await this.accountRepository.update({ maNcc }, dto);
+    const MaNCC = dto.MaNCC;
+    return await this.accountRepository.update({ MaNCC }, dto);
   }
 }

@@ -4,45 +4,45 @@ import { IsNotEmpty } from 'class-validator';
 export class JoinedReceiptDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly soPhieu: string;
+  readonly SoPhieu: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly ngayNhap: string;
+  readonly NgayNhap: string;
 
   @ApiProperty({ required: false })
-  readonly maNcc: string;
+  readonly MaNCC: string;
 
   @ApiProperty({ required: false })
-  readonly maNguoiGiao: string;
+  readonly MaNguoiGiao: string;
 
   @ApiProperty({ required: false })
-  readonly maKho: string;
+  readonly MaKho: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly lyDo: string;
+  readonly LyDo: string;
 
   @ApiProperty({ required: false })
-  readonly tkCo: string;
+  readonly TKCo: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tongTien: string;
+  readonly TongTien: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly chungTuLq: string;
+  readonly ChungTuLQ: string;
 
   @ApiProperty({ required: false })
-  readonly tenNcc: string;
+  readonly TenNCC: string;
 
   @ApiProperty({ required: false })
-  readonly tenNguoiGiao: string;
+  readonly TenNguoiGiao: string;
 
   @ApiProperty({ required: false })
-  readonly tenKho: string;
+  readonly TenKho: string;
 
   @ApiProperty({ required: false })
-  readonly diaChiKho: string;
+  readonly DiaChiKho: string;
 }

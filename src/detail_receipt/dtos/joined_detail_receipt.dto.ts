@@ -4,48 +4,48 @@ import { IsNotEmpty } from 'class-validator';
 export class JoinedDetailReceiptDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maSo: number;
+  readonly MaSo: number;
 
   @ApiProperty({ required: false })
-  readonly soPhieu: string;
+  readonly SoPhieu: string;
 
   @ApiProperty({ required: false })
-  readonly maVt: string;
+  readonly MaVT: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly slSoSach: number;
+  readonly SLSoSach: number;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly slThucTe: number;
+  readonly SLThucTe: number;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly donGia: string;
+  readonly DonGia: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly thanhTien: string;
+  readonly ThanhTien: string;
 
   @ApiProperty({ required: false })
-  readonly tongTT: string;
+  readonly TongTT: string;
 
   @ApiProperty({ required: false })
-  readonly tenVt: string;
+  readonly TenVT: string;
 
   @ApiProperty({ required: false })
-  readonly tongSl: number;
+  readonly TongSL: number;
 
   @ApiProperty({ required: false })
   readonly ngay: string;
 
   @ApiProperty({ required: false })
-  readonly maTK: string;
+  readonly MaTK: string;
 
   @ApiProperty({ required: false })
-  readonly lyDo: string;
+  readonly LyDo: string;
 
   @ApiProperty({ required: false })
-  readonly tenDvt: string;
+  readonly TenDVT: string;
 }

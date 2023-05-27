@@ -23,9 +23,9 @@ export class UsersController {
   @Public()
   @Post('login')
   async login(@Body() dto: LoginDto) {
-    const auth = await this.userService.findOne(dto.tenDangNhap, dto.matKhau);
+    const auth = await this.userService.findOne(dto.TenDangNhap, dto.MatKhau);
     if (auth === null) throw new UnauthorizedException();
-    const payload = { username: auth.tenDangNhap, sub: auth.hoTen };
+    const payload = { username: auth.TenDangNhap, sub: auth.HoTen };
     return {
       access_token: await this.jwtService.signAsync(payload),
       data: auth,

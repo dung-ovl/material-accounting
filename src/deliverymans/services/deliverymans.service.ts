@@ -20,24 +20,24 @@ export class DeliveryMansService {
     return this.deliveryMansRepository.find();
   }
 
-  findOne(maNguoiGiao: string): Promise<Nguoigiao | null> {
-    return this.deliveryMansRepository.findOneBy({ maNguoiGiao });
+  findOne(MaNguoiGiao: string): Promise<Nguoigiao | null> {
+    return this.deliveryMansRepository.findOneBy({ MaNguoiGiao });
   }
 
-  async remove(maNguoiGiao: string): Promise<void> {
-    await this.deliveryMansRepository.delete(maNguoiGiao);
+  async remove(MaNguoiGiao: string): Promise<void> {
+    await this.deliveryMansRepository.delete(MaNguoiGiao);
   }
 
   joinWithNcc(): Promise<JoinedDeliveryManDto[]> {
     return this.deliveryMansRepository
       .createQueryBuilder('nguoigiao')
-      .leftJoinAndSelect('nguoigiao.maNcc2', 'ncc')
+      .leftJoinAndSelect('nguoigiao.MaNCC2', 'ncc')
       .select([
-        'nguoigiao.maNguoiGiao AS maNguoiGiao',
-        'nguoigiao.tenNguoiGiao AS tenNguoiGiao',
-        'nguoigiao.diaChi AS diaChi',
-        'nguoigiao.maNcc AS maNcc',
-        'ncc.tenNcc AS tenNcc',
+        'nguoigiao.MaNguoiGiao AS MaNguoiGiao',
+        'nguoigiao.TenNguoiGiao AS TenNguoiGiao',
+        'nguoigiao.DiaChi AS DiaChi',
+        'nguoigiao.MaNCC AS MaNCC',
+        'ncc.TenNCC AS TenNCC',
       ])
       .getRawMany();
   }
@@ -46,20 +46,20 @@ export class DeliveryMansService {
     dto: CreateDeliveryManDto,
   ): Promise<Nguoigiao | ValidationError[]> {
     // check uniqueness of username/email
-    const { maNguoiGiao } = dto;
+    const { MaNguoiGiao } = dto;
     const qb = await this.deliveryMansRepository
       .createQueryBuilder('nguoigiao')
-      .where('nguoigiao.MaNguoiGiao = :maNguoiGiao', { maNguoiGiao });
+      .where('nguoigiao.MaNguoiGiao = :MaNguoiGiao', { MaNguoiGiao });
 
     const find = await qb.getOne();
 
     if (find) return [];
 
     const newMan = new Nguoigiao();
-    newMan.maNguoiGiao = dto.maNguoiGiao;
-    newMan.tenNguoiGiao = dto.tenNguoiGiao;
-    newMan.diaChi = dto.diaChi;
-    newMan.maNcc = dto.maNcc;
+    newMan.MaNguoiGiao = dto.MaNguoiGiao;
+    newMan.TenNguoiGiao = dto.TenNguoiGiao;
+    newMan.DiaChi = dto.DiaChi;
+    newMan.MaNCC = dto.MaNCC;
 
     const errors = await validate(newMan);
     if (errors.length > 0) return errors;
@@ -67,7 +67,7 @@ export class DeliveryMansService {
   }
 
   async update(dto: UpdateDeliveryManDto) {
-    const maNguoiGiao = dto.maNguoiGiao;
-    return await this.deliveryMansRepository.update({ maNguoiGiao }, dto);
+    const MaNguoiGiao = dto.MaNguoiGiao;
+    return await this.deliveryMansRepository.update({ MaNguoiGiao }, dto);
   }
 }

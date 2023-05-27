@@ -44,8 +44,8 @@ export class StaffsController {
     return await this.staffsService.update(dto);
   }
 
-  @Delete('/:maNv')
-  async delete(@Param('maNv') maNv: string) {
-    return await this.staffsService.remove(maNv);
+  @Delete('/:MaNV')
+  async delete(@Param('MaNV') MaNV: string) {
+    return await this.staffsService.remove(MaNV);
   }
 }

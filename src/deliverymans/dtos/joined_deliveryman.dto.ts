@@ -4,19 +4,19 @@ import { IsNotEmpty } from 'class-validator';
 export class JoinedDeliveryManDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maNguoiGiao: string;
+  readonly MaNguoiGiao: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenNguoiGiao: string;
+  readonly TenNguoiGiao: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly diaChi: string;
+  readonly DiaChi: string;
 
   @ApiProperty({ required: false })
-  readonly maNcc: string;
+  readonly MaNCC: string;
 
   @ApiProperty({ required: false })
-  readonly tenNcc: string;
+  readonly TenNCC: string;
 }

@@ -16,32 +16,32 @@ export class ContructionService {
     return this.contructionRepository.find();
   }
 
-  findOne(maCongTrinh: string): Promise<Congtrinh | null> {
-    return this.contructionRepository.findOneBy({ maCongTrinh });
+  findOne(MaCongTrinh: string): Promise<Congtrinh | null> {
+    return this.contructionRepository.findOneBy({ MaCongTrinh });
   }
 
-  async remove(maCongTrinh: string): Promise<void> {
-    await this.contructionRepository.delete(maCongTrinh);
+  async remove(MaCongTrinh: string): Promise<void> {
+    await this.contructionRepository.delete(MaCongTrinh);
   }
 
   async create(
     dto: CreateContructionDto,
   ): Promise<Congtrinh | ValidationError[]> {
     // check uniqueness of username/email
-    const { maCongTrinh } = dto;
+    const { MaCongTrinh } = dto;
     const qb = await this.contructionRepository
       .createQueryBuilder('congtrinh')
-      .where('congtrinh.MaCongTrinh = :maCongTrinh', { maCongTrinh });
+      .where('congtrinh.MaCongTrinh = :MaCongTrinh', { MaCongTrinh });
 
     const find = await qb.getOne();
 
     if (find) return [];
 
     const newContruc = new Congtrinh();
-    newContruc.maCongTrinh = dto.maCongTrinh;
-    newContruc.tenCongTrinh = dto.tenCongTrinh;
-    newContruc.diaChi = dto.diaChi;
-    newContruc.moTa = dto.moTa;
+    newContruc.MaCongTrinh = dto.MaCongTrinh;
+    newContruc.TenCongTrinh = dto.TenCongTrinh;
+    newContruc.DiaChi = dto.DiaChi;
+    newContruc.MoTa = dto.MoTa;
 
     const errors = await validate(newContruc);
     if (errors.length > 0) return errors;
@@ -49,7 +49,7 @@ export class ContructionService {
   }
 
   async update(dto: UpdateContructionDto) {
-    const maCongTrinh = dto.maCongTrinh;
-    return await this.contructionRepository.update({ maCongTrinh }, dto);
+    const MaCongTrinh = dto.MaCongTrinh;
+    return await this.contructionRepository.update({ MaCongTrinh }, dto);
   }
 }

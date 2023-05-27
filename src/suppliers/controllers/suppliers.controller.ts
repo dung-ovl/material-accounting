@@ -28,9 +28,9 @@ export class SuppliersController {
   }
 
   @Public()
-  @Get('/:maNcc')
-  async getById(@Param('maNcc') maNcc: string) {
-    const acc = await this.suppliersService.findOne(maNcc);
+  @Get('/:MaNCC')
+  async getById(@Param('MaNCC') MaNCC: string) {
+    const acc = await this.suppliersService.findOne(MaNCC);
     if (acc == null) throw new NotFoundException();
     return acc;
   }
@@ -47,8 +47,8 @@ export class SuppliersController {
     return await this.suppliersService.update(dto);
   }
 
-  @Delete('/:maNcc')
-  async delete(@Param('maNcc') maNcc: string) {
-    return await this.suppliersService.remove(maNcc);
+  @Delete('/:MaNCC')
+  async delete(@Param('MaNCC') MaNCC: string) {
+    return await this.suppliersService.remove(MaNCC);
   }
 }

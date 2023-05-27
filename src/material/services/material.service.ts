@@ -20,48 +20,48 @@ export class MaterialService {
     return this.materialRepository.find();
   }
 
-  findOne(maVt: string): Promise<Vattu | null> {
-    return this.materialRepository.findOneBy({ maVt });
+  findOne(MaVT: string): Promise<Vattu | null> {
+    return this.materialRepository.findOneBy({ MaVT });
   }
 
-  async remove(maVt: string): Promise<void> {
-    await this.materialRepository.delete(maVt);
+  async remove(MaVT: string): Promise<void> {
+    await this.materialRepository.delete(MaVT);
   }
 
   joinWithCT(): Promise<JoinedMaterialDto[]> {
     return this.materialRepository
       .createQueryBuilder('vattu')
-      .leftJoinAndSelect('vattu.maDvt2', 'dvt')
-      .leftJoinAndSelect('vattu.maLoai2', 'loai')
+      .leftJoinAndSelect('vattu.MaDVT2', 'dvt')
+      .leftJoinAndSelect('vattu.MaLoai2', 'loai')
       .select([
-        'vattu.maVt AS maVt',
-        'vattu.tenVt AS tenVt',
-        'vattu.maLoai AS maLoai',
-        'loai.tenLoai AS tenLoai',
-        'vattu.maDvt AS maDvt',
-        'dvt.tenDvt AS tenDvt',
-        'vattu.maTk AS maTk',
+        'vattu.MaVT AS MaVT',
+        'vattu.TenVT AS TenVT',
+        'vattu.MaLoai AS MaLoai',
+        'loai.TenLoai AS TenLoai',
+        'vattu.MaDVT AS MaDVT',
+        'dvt.TenDVT AS TenDVT',
+        'vattu.MaTK AS MaTK',
       ])
       .getRawMany();
   }
 
   async create(dto: CreateMaterialDto): Promise<Vattu | ValidationError[]> {
     // check uniqueness of username/email
-    const { maVt } = dto;
+    const { MaVT } = dto;
     const qb = await this.materialRepository
       .createQueryBuilder('vattu')
-      .where('vattu.MaVt = :maVt', { maVt });
+      .where('vattu.MaVT = :MaVT', { MaVT });
 
     const find = await qb.getOne();
 
     if (find) return [];
 
     const newMaterial = new Vattu();
-    newMaterial.maVt = dto.maVt;
-    newMaterial.tenVt = dto.tenVt;
-    newMaterial.maLoai = dto.maLoai;
-    newMaterial.maTk = dto.maTk;
-    newMaterial.maDvt = dto.maDvt;
+    newMaterial.MaVT = dto.MaVT;
+    newMaterial.TenVT = dto.TenVT;
+    newMaterial.MaLoai = dto.MaLoai;
+    newMaterial.MaTK = dto.MaTK;
+    newMaterial.MaDVT = dto.MaDVT;
 
     const errors = await validate(newMaterial);
     if (errors.length > 0) return errors;
@@ -69,7 +69,7 @@ export class MaterialService {
   }
 
   async update(dto: UpdateMaterialDto) {
-    const maVt = dto.maVt;
-    return await this.materialRepository.update({ maVt }, dto);
+    const MaVT = dto.MaVT;
+    return await this.materialRepository.update({ MaVT }, dto);
   }
 }

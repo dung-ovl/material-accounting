@@ -28,9 +28,9 @@ export class AccountsController {
   }
 
   @Public()
-  @Get('/:maTk')
-  async getById(@Param('maTk') maTk: string) {
-    const acc = await this.accountsService.findOne(maTk);
+  @Get('/:MaTK')
+  async getById(@Param('MaTK') MaTK: string) {
+    const acc = await this.accountsService.findOne(MaTK);
     if (acc == null) throw new NotFoundException();
     return acc;
   }
@@ -47,8 +47,8 @@ export class AccountsController {
     return await this.accountsService.update(dto);
   }
 
-  @Delete('/:maTk')
-  async delete(@Param('maTk') maTk: string) {
-    return await this.accountsService.remove(maTk);
+  @Delete('/:MaTK')
+  async delete(@Param('MaTK') MaTK: string) {
+    return await this.accountsService.remove(MaTK);
   }
 }

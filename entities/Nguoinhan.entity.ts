@@ -9,28 +9,28 @@ import {
 import { Congtrinh } from './Congtrinh.entity';
 import { Phieuxuat } from './Phieuxuat.entity';
 
-@Index('FK_NguoiNhan_CongTrinh', ['maCongTrinh'], {})
+@Index('FK_NguoiNhan_CongTrinh', ['MaCongTrinh'], {})
 @Entity('nguoinhan', { schema: 'ketoan' })
 export class Nguoinhan {
   @Column('varchar', { primary: true, name: 'MaNguoiNhan', length: 50 })
-  maNguoiNhan: string;
+  MaNguoiNhan: string;
 
   @Column('varchar', { name: 'TenNguoiNhan', length: 50 })
-  tenNguoiNhan: string;
+  TenNguoiNhan: string;
 
   @Column('varchar', { name: 'DiaChi', length: 100 })
-  diaChi: string;
+  DiaChi: string;
 
   @Column('varchar', { name: 'MaCongTrinh', nullable: true, length: 50 })
-  maCongTrinh: string | null;
+  MaCongTrinh: string | null;
 
   @ManyToOne(() => Congtrinh, (congtrinh) => congtrinh.nguoinhans, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'MaCongTrinh', referencedColumnName: 'maCongTrinh' }])
-  maCongTrinh2: Congtrinh;
+  @JoinColumn([{ name: 'MaCongTrinh', referencedColumnName: 'MaCongTrinh' }])
+  MaCongTrinh2: Congtrinh;
 
-  @OneToMany(() => Phieuxuat, (phieuxuat) => phieuxuat.maNguoiNhan2)
+  @OneToMany(() => Phieuxuat, (phieuxuat) => phieuxuat.MaNguoiNhan2)
   phieuxuats: Phieuxuat[];
 }

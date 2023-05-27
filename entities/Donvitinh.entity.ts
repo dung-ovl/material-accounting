@@ -4,11 +4,11 @@ import { Vattu } from './Vattu.entity';
 @Entity('donvitinh', { schema: 'ketoan' })
 export class Donvitinh {
   @Column('varchar', { primary: true, name: 'MaDVT', length: 50 })
-  maDvt: string;
+  MaDVT: string;
 
   @Column('varchar', { name: 'TenDVT', length: 50 })
-  tenDvt: string;
+  TenDVT: string;
 
-  @OneToMany(() => Vattu, (vattu) => vattu.maDvt2)
+  @OneToMany(() => Vattu, (vattu) => vattu.MaDVT2)
   vattus: Vattu[];
 }

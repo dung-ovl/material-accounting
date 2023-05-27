@@ -49,7 +49,7 @@ export class MaterialController {
   }
 
   @Delete('/:MaVT')
-  async delete(@Param('maVT') maVt: string) {
-    return await this.materialService.remove(maVt);
+  async delete(@Param('MaVT') MaVT: string) {
+    return await this.materialService.remove(MaVT);
   }
 }

@@ -9,28 +9,28 @@ import {
 import { Nhacungcap } from './Nhacungcap.entity';
 import { Phieunhap } from './Phieunhap.entity';
 
-@Index('FK_NguoiGiao_NCC', ['maNcc'], {})
+@Index('FK_NguoiGiao_NCC', ['MaNCC'], {})
 @Entity('nguoigiao', { schema: 'ketoan' })
 export class Nguoigiao {
   @Column('varchar', { primary: true, name: 'MaNguoiGiao', length: 50 })
-  maNguoiGiao: string;
+  MaNguoiGiao: string;
 
   @Column('varchar', { name: 'TenNguoiGiao', length: 50 })
-  tenNguoiGiao: string;
+  TenNguoiGiao: string;
 
   @Column('varchar', { name: 'DiaChi', length: 100 })
-  diaChi: string;
+  DiaChi: string;
 
   @Column('varchar', { name: 'MaNCC', nullable: true, length: 50 })
-  maNcc: string | null;
+  MaNCC: string | null;
 
   @ManyToOne(() => Nhacungcap, (nhacungcap) => nhacungcap.nguoigiaos, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'MaNCC', referencedColumnName: 'maNcc' }])
-  maNcc2: Nhacungcap;
+  @JoinColumn([{ name: 'MaNCC', referencedColumnName: 'MaNCC' }])
+  MaNCC2: Nhacungcap;
 
-  @OneToMany(() => Phieunhap, (phieunhap) => phieunhap.maNguoiGiao2)
+  @OneToMany(() => Phieunhap, (phieunhap) => phieunhap.MaNguoiGiao2)
   phieunhaps: Phieunhap[];
 }

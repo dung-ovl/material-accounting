@@ -4,9 +4,9 @@ import { IsNotEmpty } from 'class-validator';
 export class LoginDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenDangNhap: string;
+  readonly TenDangNhap: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly matKhau: string;
+  readonly MatKhau: string;
 }

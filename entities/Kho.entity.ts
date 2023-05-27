@@ -12,40 +12,40 @@ import { Nhanvien } from './Nhanvien.entity';
 import { Phieunhap } from './Phieunhap.entity';
 import { Phieuxuat } from './Phieuxuat.entity';
 
-@Index('FK_Kho_NhanVien', ['maThuKho'], {})
+@Index('FK_Kho_NhanVien', ['MaThuKho'], {})
 @Entity('kho', { schema: 'ketoan' })
 export class Kho {
   @Column('varchar', { primary: true, name: 'MaKho', length: 50 })
-  maKho: string;
+  MaKho: string;
 
   @Column('varchar', { name: 'TenKho', length: 50 })
-  tenKho: string;
+  TenKho: string;
 
   @Column('varchar', { name: 'DiaChi', length: 100 })
-  diaChi: string;
+  DiaChi: string;
 
   @Column('varchar', { name: 'SDT', length: 10 })
-  sdt: string;
+  SDT: string;
 
   @Column('varchar', { name: 'MaThuKho', nullable: true, length: 50 })
-  maThuKho: string | null;
+  MaThuKho: string | null;
 
-  @OneToMany(() => Bbkiemke, (bbkiemke) => bbkiemke.maKho2)
+  @OneToMany(() => Bbkiemke, (bbkiemke) => bbkiemke.MaKho2)
   bbkiemkes: Bbkiemke[];
 
-  @OneToMany(() => Dudauvattu, (dudauvattu) => dudauvattu.maKho2)
+  @OneToMany(() => Dudauvattu, (dudauvattu) => dudauvattu.MaKho2)
   dudauvattus: Dudauvattu[];
 
   @ManyToOne(() => Nhanvien, (nhanvien) => nhanvien.khos, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'MaThuKho', referencedColumnName: 'maNv' }])
-  maThuKho2: Nhanvien;
+  @JoinColumn([{ name: 'MaThuKho', referencedColumnName: 'MaNV' }])
+  MaThuKho2: Nhanvien;
 
-  @OneToMany(() => Phieunhap, (phieunhap) => phieunhap.maKho2)
+  @OneToMany(() => Phieunhap, (phieunhap) => phieunhap.MaKho2)
   phieunhaps: Phieunhap[];
 
-  @OneToMany(() => Phieuxuat, (phieuxuat) => phieuxuat.maKho2)
+  @OneToMany(() => Phieuxuat, (phieuxuat) => phieuxuat.MaKho2)
   phieuxuats: Phieuxuat[];
 }

@@ -9,42 +9,42 @@ import {
 import { Kho } from './Kho.entity';
 import { Vattu } from './Vattu.entity';
 
-@Index('FK_Ton_VT', ['maVt'], {})
-@Index('FK_Ton_Kho', ['maKho'], {})
+@Index('FK_Ton_VT', ['MaVT'], {})
+@Index('FK_Ton_Kho', ['MaKho'], {})
 @Entity('dudauvattu', { schema: 'ketoan' })
 export class Dudauvattu {
   @PrimaryGeneratedColumn({ type: 'int', name: 'MaSo' })
-  maSo: number;
+  MaSo: number;
 
   @Column('varchar', { name: 'MaVT', length: 50 })
-  maVt: string;
+  MaVT: string;
 
   @Column('varchar', { name: 'MaKho', length: 50 })
-  maKho: string;
+  MaKho: string;
 
   @Column('date', { name: 'Ngay' })
   ngay: string;
 
   @Column('double', { name: 'SoLuong', precision: 22 })
-  soLuong: number;
+  SoLuong: number;
 
   @Column('decimal', { name: 'DonGia', precision: 19, scale: 0 })
-  donGia: string;
+  DonGia: string;
 
   @Column('decimal', { name: 'ThanhTien', precision: 19, scale: 0 })
-  thanhTien: string;
+  ThanhTien: string;
 
   @ManyToOne(() => Kho, (kho) => kho.dudauvattus, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'MaKho', referencedColumnName: 'maKho' }])
-  maKho2: Kho;
+  @JoinColumn([{ name: 'MaKho', referencedColumnName: 'MaKho' }])
+  MaKho2: Kho;
 
   @ManyToOne(() => Vattu, (vattu) => vattu.dudauvattus, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'MaVT', referencedColumnName: 'maVt' }])
-  maVt2: Vattu;
+  @JoinColumn([{ name: 'MaVT', referencedColumnName: 'MaVT' }])
+  MaVT2: Vattu;
 }

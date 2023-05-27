@@ -2,10 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class QuerySurmaterialDto {
   @ApiProperty({ required: false })
-  readonly maKho: string;
+  readonly MaKho: string;
 
   @ApiProperty({ required: false })
-  readonly maVt: string;
+  readonly MaVT: string;
 
   @ApiProperty({ required: false })
   readonly ngay: string;
@@ -17,5 +17,5 @@ export class QuerySurmaterialDto {
   readonly nam: string;
 
   @ApiProperty({ required: false })
-  readonly ngayLap: string;
+  readonly NgayLap: string;
 }

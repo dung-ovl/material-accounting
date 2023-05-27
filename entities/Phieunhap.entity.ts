@@ -12,67 +12,67 @@ import { Kho } from './Kho.entity';
 import { Nhacungcap } from './Nhacungcap.entity';
 import { Nguoigiao } from './Nguoigiao.entity';
 
-@Index('FK_PhieuNhap_Kho', ['maKho'], {})
-@Index('FK_PhieuNhap_NCC', ['maNcc'], {})
-@Index('FK_PhieuNhap_NG', ['maNguoiGiao'], {})
-@Index('FK_PN_TKCo', ['tkCo'], {})
+@Index('FK_PhieuNhap_Kho', ['MaKho'], {})
+@Index('FK_PhieuNhap_NCC', ['MaNCC'], {})
+@Index('FK_PhieuNhap_NG', ['MaNguoiGiao'], {})
+@Index('FK_PN_TKCo', ['TKCo'], {})
 @Entity('phieunhap', { schema: 'ketoan' })
 export class Phieunhap {
   @Column('varchar', { primary: true, name: 'SoPhieu', length: 50 })
-  soPhieu: string;
+  SoPhieu: string;
 
   @Column('date', { name: 'NgayNhap' })
-  ngayNhap: string;
+  NgayNhap: string;
 
   @Column('varchar', { name: 'MaNCC', nullable: true, length: 50 })
-  maNcc: string | null;
+  MaNCC: string | null;
 
   @Column('varchar', { name: 'MaNguoiGiao', nullable: true, length: 50 })
-  maNguoiGiao: string | null;
+  MaNguoiGiao: string | null;
 
   @Column('varchar', { name: 'MaKho', nullable: true, length: 50 })
-  maKho: string | null;
+  MaKho: string | null;
 
   @Column('varchar', { name: 'LyDo', length: 100 })
-  lyDo: string;
+  LyDo: string;
 
   @Column('varchar', { name: 'TKCo', nullable: true, length: 50 })
-  tkCo: string | null;
+  TKCo: string | null;
 
   @Column('decimal', { name: 'TongTien', precision: 19, scale: 0 })
-  tongTien: string;
+  TongTien: string;
 
   @Column('varchar', { name: 'ChungTuLQ', length: 100 })
-  chungTuLq: string;
+  ChungTuLQ: string;
 
-  @OneToMany(() => CtPhieunhap, (ctPhieunhap) => ctPhieunhap.soPhieu2)
+  @OneToMany(() => CtPhieunhap, (ctPhieunhap) => ctPhieunhap.SoPhieu2)
   ctPhieunhaps: CtPhieunhap[];
 
   @ManyToOne(() => Taikhoan, (taikhoan) => taikhoan.phieunhaps, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'TKCo', referencedColumnName: 'maTk' }])
-  tkCo2: Taikhoan;
+  @JoinColumn([{ name: 'TKCo', referencedColumnName: 'MaTK' }])
+  TKCo2: Taikhoan;
 
   @ManyToOne(() => Kho, (kho) => kho.phieunhaps, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'MaKho', referencedColumnName: 'maKho' }])
-  maKho2: Kho;
+  @JoinColumn([{ name: 'MaKho', referencedColumnName: 'MaKho' }])
+  MaKho2: Kho;
 
   @ManyToOne(() => Nhacungcap, (nhacungcap) => nhacungcap.phieunhaps, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'MaNCC', referencedColumnName: 'maNcc' }])
-  maNcc2: Nhacungcap;
+  @JoinColumn([{ name: 'MaNCC', referencedColumnName: 'MaNCC' }])
+  MaNCC2: Nhacungcap;
 
   @ManyToOne(() => Nguoigiao, (nguoigiao) => nguoigiao.phieunhaps, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'MaNguoiGiao', referencedColumnName: 'maNguoiGiao' }])
-  maNguoiGiao2: Nguoigiao;
+  @JoinColumn([{ name: 'MaNguoiGiao', referencedColumnName: 'MaNguoiGiao' }])
+  MaNguoiGiao2: Nguoigiao;
 }

@@ -4,33 +4,33 @@ import { IsNotEmpty } from 'class-validator';
 export class UpdateReceiptDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly soPhieu: string;
+  readonly SoPhieu: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly ngayNhap: string;
+  readonly NgayNhap: string;
 
   @ApiProperty({ required: false })
-  readonly maNcc: string;
+  readonly MaNCC: string;
 
   @ApiProperty({ required: false })
-  readonly maNguoiGiao: string;
+  readonly MaNguoiGiao: string;
 
   @ApiProperty({ required: false })
-  readonly maKho: string;
+  readonly MaKho: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly lyDo: string;
+  readonly LyDo: string;
 
   @ApiProperty({ required: false })
-  readonly tkCo: string;
+  readonly TKCo: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tongTien: string;
+  readonly TongTien: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly chungTuLq: string;
+  readonly ChungTuLQ: string;
 }

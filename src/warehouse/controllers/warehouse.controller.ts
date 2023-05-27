@@ -45,7 +45,7 @@ export class WarehouseController {
   }
 
   @Delete('/:MaKho')
-  async delete(@Param('MaKho') maKho: string) {
-    return await this.warehouseService.remove(maKho);
+  async delete(@Param('MaKho') MaKho: string) {
+    return await this.warehouseService.remove(MaKho);
   }
 }

@@ -4,13 +4,13 @@ import { IsNotEmpty } from 'class-validator';
 export class UpdateDepartmentDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maBoPhan: string;
+  readonly MaBoPhan: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenBoPhan: string;
+  readonly TenBoPhan: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly moTa: string;
+  readonly MoTa: string;
 }

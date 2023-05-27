@@ -4,19 +4,19 @@ import { IsNotEmpty } from 'class-validator';
 export class JoinedRecipientDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maNguoiNhan: string;
+  readonly MaNguoiNhan: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenNguoiNhan: string;
+  readonly TenNguoiNhan: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly diaChi: string;
+  readonly DiaChi: string;
 
   @ApiProperty({ required: false })
-  readonly maCongTrinh: string;
+  readonly MaCongTrinh: string;
 
   @ApiProperty({ required: false })
-  readonly tenCongTrinh: string;
+  readonly TenCongTrinh: string;
 }

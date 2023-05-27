@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Phieunhap } from '../../../entities/Phieunhap.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateExportDto , UpdateExportDto } from '../dtos';
+import { CreateExportDto, UpdateExportDto } from '../dtos';
 import { ValidationError, validate } from 'class-validator';
 import { JoinedExportDto } from '../dtos/joined_export.dto';
 import { Phieuxuat } from 'entities/Phieuxuat.entity';
@@ -18,56 +18,56 @@ export class ExportService {
     return this.exportRepository.find();
   }
 
-  async remove(soPhieu: string): Promise<void> {
-    await this.exportRepository.delete(soPhieu);
+  async remove(SoPhieu: string): Promise<void> {
+    await this.exportRepository.delete(SoPhieu);
   }
 
   joinWithRec(): Promise<JoinedExportDto[]> {
     return this.exportRepository
       .createQueryBuilder('phieuxuat')
-      .leftJoin('phieuxuat.maCongTrinh2', 'maCongTrinh2')
-      .leftJoin('phieuxuat.maKho2', 'maKho2')
-      .leftJoin('phieuxuat.maNguoiNhan2', 'maNguoiNhan2')
+      .leftJoin('phieuxuat.MaCongTrinh2', 'MaCongTrinh2')
+      .leftJoin('phieuxuat.MaKho2', 'MaKho2')
+      .leftJoin('phieuxuat.MaNguoiNhan2', 'MaNguoiNhan2')
       .select([
-        'phieuxuat.soPhieu AS soPhieu',
-        'phieuxuat.ngayXuat AS ngayXuat',
-        'phieuxuat.maCongTrinh AS maCongTrinh',
-        'maCongTrinh2.tenCongTrinh AS tenCongTrinh',
-        'maCongTrinh2.diaChi AS diaChiCt',
-        'phieuxuat.maNguoiNhan AS maNguoiNhan',
-        'maNguoiNhan2.tenNguoiNhan AS tenNguoiNhan',
-        'phieuxuat.maKho AS maKho',
-        'maKho2.tenKho AS tenKho',
-        'maKho2.diaChi AS diaChiKho',
-        'phieuxuat.lyDo AS lyDo',
-        'phieuxuat.tkNo AS tkNo',
-        'phieuxuat.tongTien AS tongTien',
-        'phieuxuat.chungTuLq AS chungTuLq',
+        'phieuxuat.SoPhieu AS SoPhieu',
+        'phieuxuat.NgayXuat AS NgayXuat',
+        'phieuxuat.MaCongTrinh AS MaCongTrinh',
+        'MaCongTrinh2.TenCongTrinh AS TenCongTrinh',
+        'MaCongTrinh2.DiaChi AS DiaChiCT',
+        'phieuxuat.MaNguoiNhan AS MaNguoiNhan',
+        'MaNguoiNhan2.TenNguoiNhan AS TenNguoiNhan',
+        'phieuxuat.MaKho AS MaKho',
+        'MaKho2.TenKho AS TenKho',
+        'MaKho2.DiaChi AS DiaChiKho',
+        'phieuxuat.LyDo AS LyDo',
+        'phieuxuat.TKNo AS TKNo',
+        'phieuxuat.TongTien AS TongTien',
+        'phieuxuat.ChungTuLQ AS ChungTuLQ',
       ])
       .getRawMany();
   }
 
   async create(dto: CreateExportDto): Promise<Phieuxuat | ValidationError[]> {
     // check uniqueness of username/email
-    const { soPhieu } = dto;
+    const { SoPhieu } = dto;
     const qb = await this.exportRepository
       .createQueryBuilder('phieuxuat')
-      .where('phieuxuat.soPhieu = :soPhieu', { soPhieu });
+      .where('phieuxuat.SoPhieu = :SoPhieu', { SoPhieu });
 
     const inv = await qb.getOne();
 
     if (inv) return [];
 
     const newInv = new Phieuxuat();
-    newInv.soPhieu = dto.soPhieu;
-    newInv.ngayXuat = dto.ngayXuat;
-    newInv.maCongTrinh = dto.maCongTrinh;
-    newInv.maNguoiNhan = dto.maNguoiNhan;
-    newInv.maKho = dto.maKho;
-    newInv.lyDo = dto.lyDo;
-    newInv.tkNo = dto.tkNo;
-    newInv.tongTien = dto.tongTien;
-    newInv.chungTuLq = dto.chungTuLq;
+    newInv.SoPhieu = dto.SoPhieu;
+    newInv.NgayXuat = dto.NgayXuat;
+    newInv.MaCongTrinh = dto.MaCongTrinh;
+    newInv.MaNguoiNhan = dto.MaNguoiNhan;
+    newInv.MaKho = dto.MaKho;
+    newInv.LyDo = dto.LyDo;
+    newInv.TKNo = dto.TKNo;
+    newInv.TongTien = dto.TongTien;
+    newInv.ChungTuLQ = dto.ChungTuLQ;
 
     const errors = await validate(newInv);
     if (errors.length > 0) return errors;
@@ -75,11 +75,14 @@ export class ExportService {
   }
 
   async update(dto: UpdateExportDto) {
-    const soPhieu = dto.soPhieu;
-    return await this.exportRepository.update({ soPhieu }, dto);
+    const SoPhieu = dto.SoPhieu;
+    return await this.exportRepository.update({ SoPhieu }, dto);
   }
 
-  async updat2(soPhieu, dto: UpdateExportDto) {
-    return await this.exportRepository.update({ soPhieu }, {tongTien: dto.tongTien});
+  async updat2(SoPhieu, dto: UpdateExportDto) {
+    return await this.exportRepository.update(
+      { SoPhieu },
+      { TongTien: dto.TongTien },
+    );
   }
 }

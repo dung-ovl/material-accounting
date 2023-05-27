@@ -16,32 +16,32 @@ export class AccountsService {
     return this.accountRepository.find();
   }
 
-  findOne(maTk: string): Promise<Taikhoan | null> {
-    return this.accountRepository.findOneBy({ maTk });
+  findOne(MaTK: string): Promise<Taikhoan | null> {
+    return this.accountRepository.findOneBy({ MaTK });
   }
 
-  async remove(maTk: string): Promise<void> {
-    await this.accountRepository.delete(maTk);
+  async remove(MaTK: string): Promise<void> {
+    await this.accountRepository.delete(MaTK);
   }
 
   async create(dto: CreateAccountDto): Promise<Taikhoan | ValidationError[]> {
     // check uniqueness of username/email
-    const { maTk, tenTk } = dto;
+    const { MaTK, TenTK } = dto;
     const qb = await this.accountRepository
       .createQueryBuilder('taikhoan')
-      .where('taikhoan.MaTK = :maTk', { maTk })
-      .orWhere('taikhoan.TenTK = :tenTk', { tenTk });
+      .where('taikhoan.MaTK = :MaTK', { MaTK })
+      .orWhere('taikhoan.TenTK = :TenTK', { TenTK });
 
     const acc = await qb.getOne();
 
     if (acc) return [];
 
     const newAcc = new Taikhoan();
-    newAcc.maTk = dto.maTk;
-    newAcc.tenTk = dto.tenTk;
-    newAcc.capTk = dto.capTk;
-    newAcc.tkMe = dto.tkMe;
-    newAcc.loaiTk = dto.loaiTk;
+    newAcc.MaTK = dto.MaTK;
+    newAcc.TenTK = dto.TenTK;
+    newAcc.CapTK = dto.CapTK;
+    newAcc.TKMe = dto.TKMe;
+    newAcc.LoaiTK = dto.LoaiTK;
 
     const errors = await validate(newAcc);
     if (errors.length > 0) return errors;
@@ -49,7 +49,7 @@ export class AccountsService {
   }
 
   async update(dto: UpdateAccountDto) {
-    const maTk = dto.maTk;
-    return await this.accountRepository.update({ maTk }, dto);
+    const MaTK = dto.MaTK;
+    return await this.accountRepository.update({ MaTK }, dto);
   }
 }

@@ -15,9 +15,9 @@ export class UsersService {
   }
 
   async findOne(
-    tenDangNhap: string,
-    matKhau: string,
+    TenDangNhap: string,
+    MatKhau: string,
   ): Promise<Nguoidung | null> {
-    return await this.userRepository.findOneBy({ tenDangNhap, matKhau });
+    return await this.userRepository.findOneBy({ TenDangNhap, MatKhau });
   }
 }

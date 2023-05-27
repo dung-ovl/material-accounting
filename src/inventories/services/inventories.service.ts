@@ -17,54 +17,54 @@ export class InventoriesService {
     return this.inventoryRepository.find();
   }
 
-  findOne(soBienBan: string): Promise<Bbkiemke | null> {
-    return this.inventoryRepository.findOneBy({ soBienBan });
+  findOne(SoBienBan: string): Promise<Bbkiemke | null> {
+    return this.inventoryRepository.findOneBy({ SoBienBan });
   }
 
-  async remove(soBienBan: string): Promise<void> {
-    await this.inventoryRepository.delete(soBienBan);
+  async remove(SoBienBan: string): Promise<void> {
+    await this.inventoryRepository.delete(SoBienBan);
   }
 
   joinWithTB(): Promise<JoinedInventoryDto[]> {
     return this.inventoryRepository
       .createQueryBuilder('bbkiemke')
-      .leftJoin('bbkiemke.maKho2', 'makho2')
-      .leftJoin('bbkiemke.truongBan2', 'truongBan2')
-      .leftJoin('bbkiemke.uyVien', 'uyVien')
-      .leftJoin('bbkiemke.uyVien3', 'uyVien3')
+      .leftJoin('bbkiemke.MaKho2', 'makho2')
+      .leftJoin('bbkiemke.TruongBan2', 'TruongBan2')
+      .leftJoin('bbkiemke.UyVien', 'UyVien')
+      .leftJoin('bbkiemke.UyVien3', 'UyVien3')
       .select([
-        'bbkiemke.soBienBan AS soBienBan',
-        'bbkiemke.ngayLap AS ngayLap',
-        'bbkiemke.maKho AS maKho',
-        'makho2.tenKho AS tenKho',
-        'bbkiemke.truongBan AS truongBan',
-        'bbkiemke.uyVien1 AS uyVien1',
-        'bbkiemke.uyVien2 AS uyVien2',
-        'truongBan2.tenNv AS tenTruongBan',
-        'uyVien.tenNv AS tenUyVien1',
-        'uyVien3.tenNv AS tenUyVien2'
+        'bbkiemke.SoBienBan AS SoBienBan',
+        'bbkiemke.NgayLap AS NgayLap',
+        'bbkiemke.MaKho AS MaKho',
+        'makho2.TenKho AS TenKho',
+        'bbkiemke.TruongBan AS TruongBan',
+        'bbkiemke.UyVien1 AS UyVien1',
+        'bbkiemke.UyVien2 AS UyVien2',
+        'TruongBan2.TenNV AS TenTruongBan',
+        'UyVien.TenNV AS TenUyVien1',
+        'UyVien3.TenNV AS TenUyVien2',
       ])
       .getRawMany();
   }
 
   async create(dto: CreateInventoryDto): Promise<Bbkiemke | ValidationError[]> {
     // check uniqueness of username/email
-    const { soBienBan } = dto;
+    const { SoBienBan } = dto;
     const qb = await this.inventoryRepository
       .createQueryBuilder('bbkiemke')
-      .where('bbkiemke.soBienBan = :soBienBan', { soBienBan });
+      .where('bbkiemke.SoBienBan = :SoBienBan', { SoBienBan });
 
     const inv = await qb.getOne();
 
     if (inv) return [];
 
     const newInv = new Bbkiemke();
-    newInv.soBienBan = dto.soBienBan;
-    newInv.ngayLap = dto.ngayLap;
-    newInv.maKho = dto.maKho;
-    newInv.truongBan = dto.truongBan;
-    newInv.uyVien1 = dto.uyVien1;
-    newInv.uyVien2 = dto.uyVien2;
+    newInv.SoBienBan = dto.SoBienBan;
+    newInv.NgayLap = dto.NgayLap;
+    newInv.MaKho = dto.MaKho;
+    newInv.TruongBan = dto.TruongBan;
+    newInv.UyVien1 = dto.UyVien1;
+    newInv.UyVien2 = dto.UyVien2;
 
     const errors = await validate(newInv);
     if (errors.length > 0) return errors;
@@ -72,7 +72,7 @@ export class InventoriesService {
   }
 
   async update(dto: UpdateInventoryDto) {
-    const soBienBan = dto.soBienBan;
-    return await this.inventoryRepository.update({ soBienBan }, dto);
+    const SoBienBan = dto.SoBienBan;
+    return await this.inventoryRepository.update({ SoBienBan }, dto);
   }
 }

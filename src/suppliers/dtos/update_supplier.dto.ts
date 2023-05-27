@@ -4,21 +4,21 @@ import { IsNotEmpty } from 'class-validator';
 export class UpdateSupplierDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maNcc: string;
+  readonly MaNCC: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenNcc: string;
+  readonly TenNCC: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly diaChi: string;
+  readonly DiaChi: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maSoThue: string;
+  readonly MaSoThue: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly sdt: string;
+  readonly SDT: string;
 }

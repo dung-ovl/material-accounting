@@ -60,9 +60,9 @@ export class DetailExportController {
   }
 
   @Public()
-  @Get('/:soPhieu')
-  async getByWith(@Param('soPhieu') soPhieu: string) {
-    return await this.detReceiptService.getByWith(soPhieu);
+  @Get('/:SoPhieu')
+  async getByWith(@Param('SoPhieu') SoPhieu: string) {
+    return await this.detReceiptService.getByWith(SoPhieu);
   }
 
   @Post()
@@ -77,8 +77,8 @@ export class DetailExportController {
     return await this.detReceiptService.update(dto);
   }
 
-  @Delete('/:soPhieu')
-  async delete(@Param('soPhieu') soPhieu: string) {
-    return await this.detReceiptService.remove(soPhieu);
+  @Delete('/:SoPhieu')
+  async delete(@Param('SoPhieu') SoPhieu: string) {
+    return await this.detReceiptService.remove(SoPhieu);
   }
 }

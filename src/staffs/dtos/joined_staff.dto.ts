@@ -4,15 +4,15 @@ import { IsNotEmpty } from 'class-validator';
 export class JoinedStaffDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maNv: string;
+  readonly MaNV: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenNv: string;
+  readonly TenNV: string;
 
   @ApiProperty({ required: false })
-  readonly maBoPhan: string;
+  readonly MaBoPhan: string;
 
   @ApiProperty({ required: false })
-  readonly tenBoPhan: string;
+  readonly TenBoPhan: string;
 }

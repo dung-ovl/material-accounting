@@ -17,57 +17,59 @@ export class DetailInventoriesService {
     return this.delinventoryRepository.find();
   }
 
-  async remove(soBienBan: string): Promise<void> {
-    await this.delinventoryRepository.delete(soBienBan);
+  async remove(SoBienBan: string): Promise<void> {
+    await this.delinventoryRepository.delete(SoBienBan);
   }
 
-  findByIdInven(soBienBan: string): Promise<JoinedDetailInventoryDto[]> {
+  findByIdInven(SoBienBan: string): Promise<JoinedDetailInventoryDto[]> {
     return this.delinventoryRepository
       .createQueryBuilder('ct_bbkiemke')
-      .leftJoin('ct_bbkiemke.maVt2', 'maVt2')
-      .leftJoin('maVt2.maDvt2', 'maDvt2')
+      .leftJoin('ct_bbkiemke.MaVT2', 'MaVT2')
+      .leftJoin('MaVT2.MaDVT2', 'MaDVT2')
       .select([
-        'ct_bbkiemke.maSo AS maSO',
-        'ct_bbkiemke.soBienBan AS soBienBan',
-        'ct_bbkiemke.maVt AS maVt',
-        'maVt2.tenVt AS tenVt',
-        'maDvt2.tenDvt AS tenDvt',
-        'ct_bbkiemke.donGia AS donGia',
-        'ct_bbkiemke.slSoSach AS slSoSach',
-        'ct_bbkiemke.slThucTe AS slThucTe',
-        'ct_bbkiemke.slThua AS slThua',
-        'ct_bbkiemke.slThieu AS slThieu',
-        'ct_bbkiemke.slPhamChatTot AS slPhamChatTot',
-        'ct_bbkiemke.slPhamChatKem AS slPhamChatKem',
-        'ct_bbkiemke.slMatPhamChat AS slMatPhamChat',
+        'ct_bbkiemke.MaSo AS MaSo',
+        'ct_bbkiemke.SoBienBan AS SoBienBan',
+        'ct_bbkiemke.MaVT AS MaVT',
+        'MaVT2.TenVT AS TenVT',
+        'MaDVT2.TenDVT AS TenDVT',
+        'ct_bbkiemke.DonGia AS DonGia',
+        'ct_bbkiemke.SLSoSach AS SLSoSach',
+        'ct_bbkiemke.SLThucTe AS SLThucTe',
+        'ct_bbkiemke.SLThua AS SLThua',
+        'ct_bbkiemke.SLThieu AS SLThieu',
+        'ct_bbkiemke.SLPhamChatTot AS SLPhamChatTot',
+        'ct_bbkiemke.SLPhamChatKem AS SLPhamChatKem',
+        'ct_bbkiemke.SLMatPhamChat AS SLMatPhamChat',
       ])
-      .where('ct_bbkiemke.soBienBan = :soBienBan', {soBienBan})
+      .where('ct_bbkiemke.SoBienBan = :SoBienBan', { SoBienBan })
       .getRawMany();
   }
 
-  async create(dto: CreateDetailInventoryDto): Promise<CtBbkiemke | ValidationError[]> {
+  async create(
+    dto: CreateDetailInventoryDto,
+  ): Promise<CtBbkiemke | ValidationError[]> {
     // check uniqueness of username/email
-    const { maSo } = dto;
+    const { MaSo } = dto;
     const qb = await this.delinventoryRepository
       .createQueryBuilder('ct_bbkiemke')
-      .where('ct_bbkiemke.maSo = :maSo', { maSo });
+      .where('ct_bbkiemke.MaSo = :MaSo', { MaSo });
 
     const inv = await qb.getOne();
 
     if (inv) return [];
 
     const newDetailInv = new CtBbkiemke();
-    newDetailInv.maSo = dto.maSo;
-    newDetailInv.soBienBan = dto.soBienBan;
-    newDetailInv.maVt = dto.maVt;
-    newDetailInv.donGia = dto.donGia;
-    newDetailInv.slSoSach = dto.slSoSach;
-    newDetailInv.slThucTe = dto.slThucTe;
-    newDetailInv.slThua = dto.slThua;
-    newDetailInv.slThieu = dto.slThieu;
-    newDetailInv.slPhamChatTot = dto.slPhamChatTot;
-    newDetailInv.slPhamChatKem = dto.slPhamChatKem;
-    newDetailInv.slMatPhamChat = dto.slMatPhamChat;
+    newDetailInv.MaSo = dto.MaSo;
+    newDetailInv.SoBienBan = dto.SoBienBan;
+    newDetailInv.MaVT = dto.MaVT;
+    newDetailInv.DonGia = dto.DonGia;
+    newDetailInv.SLSoSach = dto.SLSoSach;
+    newDetailInv.SLThucTe = dto.SLThucTe;
+    newDetailInv.SLThua = dto.SLThua;
+    newDetailInv.SLThieu = dto.SLThieu;
+    newDetailInv.SLPhamChatTot = dto.SLPhamChatTot;
+    newDetailInv.SLPhamChatKem = dto.SLPhamChatKem;
+    newDetailInv.SLMatPhamChat = dto.SLMatPhamChat;
 
     const errors = await validate(newDetailInv);
     if (errors.length > 0) return errors;
@@ -75,7 +77,7 @@ export class DetailInventoriesService {
   }
 
   async update(dto: UpdateDetailInventoryDto) {
-    const maSo = dto.maSo;
-    return await this.delinventoryRepository.update({ maSo }, dto);
+    const MaSo = dto.MaSo;
+    return await this.delinventoryRepository.update({ MaSo }, dto);
   }
 }

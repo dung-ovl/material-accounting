@@ -9,42 +9,42 @@ import {
 import { Phieuxuat } from './Phieuxuat.entity';
 import { Vattu } from './Vattu.entity';
 
-@Index('FK_CTPX_PX', ['soPhieu'], {})
-@Index('FK_CTPX_VT', ['maVt'], {})
+@Index('FK_CTPX_PX', ['SoPhieu'], {})
+@Index('FK_CTPX_VT', ['MaVT'], {})
 @Entity('ct_phieuxuat', { schema: 'ketoan' })
 export class CtPhieuxuat {
   @PrimaryGeneratedColumn({ type: 'int', name: 'MaSo' })
-  maSo: number;
+  MaSo: number;
 
   @Column('varchar', { name: 'SoPhieu', nullable: true, length: 50 })
-  soPhieu: string | null;
+  SoPhieu: string | null;
 
   @Column('varchar', { name: 'MaVT', nullable: true, length: 50 })
-  maVt: string | null;
+  MaVT: string | null;
 
   @Column('double', { name: 'SLSoSach', precision: 22 })
-  slSoSach: number;
+  SLSoSach: number;
 
   @Column('double', { name: 'SLThucTe', precision: 22 })
-  slThucTe: number;
+  SLThucTe: number;
 
   @Column('decimal', { name: 'DonGia', precision: 19, scale: 0 })
-  donGia: string;
+  DonGia: string;
 
   @Column('decimal', { name: 'ThanhTien', precision: 19, scale: 0 })
-  thanhTien: string;
+  ThanhTien: string;
 
   @ManyToOne(() => Phieuxuat, (phieuxuat) => phieuxuat.ctPhieuxuats, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'SoPhieu', referencedColumnName: 'soPhieu' }])
-  soPhieu2: Phieuxuat;
+  @JoinColumn([{ name: 'SoPhieu', referencedColumnName: 'SoPhieu' }])
+  SoPhieu2: Phieuxuat;
 
   @ManyToOne(() => Vattu, (vattu) => vattu.ctPhieuxuats, {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn([{ name: 'MaVT', referencedColumnName: 'maVt' }])
-  maVt2: Vattu;
+  @JoinColumn([{ name: 'MaVT', referencedColumnName: 'MaVT' }])
+  MaVT2: Vattu;
 }

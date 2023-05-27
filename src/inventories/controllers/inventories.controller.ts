@@ -46,8 +46,8 @@ export class InventoriesController {
     return await this.inventoriesService.update(dto);
   }
 
-  @Delete('/:soBienBan')
-  async delete(@Param('soBienBan') soBienBan: string) {
-    return await this.inventoriesService.remove(soBienBan);
+  @Delete('/:SoBienBan')
+  async delete(@Param('SoBienBan') SoBienBan: string) {
+    return await this.inventoriesService.remove(SoBienBan);
   }
 }

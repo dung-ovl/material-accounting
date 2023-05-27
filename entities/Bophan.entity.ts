@@ -5,17 +5,17 @@ import { Nhanvien } from './Nhanvien.entity';
 @Entity('bophan', { schema: 'ketoan' })
 export class Bophan {
   @Column('varchar', { primary: true, name: 'MaBoPhan', length: 50 })
-  maBoPhan: string;
+  MaBoPhan: string;
 
   @Column('varchar', { name: 'TenBoPhan', length: 50 })
-  tenBoPhan: string;
+  TenBoPhan: string;
 
   @Column('varchar', { name: 'MoTa', length: 100 })
-  moTa: string;
+  MoTa: string;
 
-  @OneToMany(() => Nguoidung, (nguoidung) => nguoidung.maBoPhan2)
+  @OneToMany(() => Nguoidung, (nguoidung) => nguoidung.MaBoPhan2)
   nguoidungs: Nguoidung[];
 
-  @OneToMany(() => Nhanvien, (nhanvien) => nhanvien.maBoPhan2)
+  @OneToMany(() => Nhanvien, (nhanvien) => nhanvien.MaBoPhan2)
   nhanviens: Nhanvien[];
 }

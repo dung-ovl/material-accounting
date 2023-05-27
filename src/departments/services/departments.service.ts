@@ -16,30 +16,30 @@ export class DepartmentsService {
     return this.departmentsRepository.find();
   }
 
-  findOne(maBoPhan: string): Promise<Bophan | null> {
-    return this.departmentsRepository.findOneBy({ maBoPhan });
+  findOne(MaBoPhan: string): Promise<Bophan | null> {
+    return this.departmentsRepository.findOneBy({ MaBoPhan });
   }
 
-  async remove(maBoPhan: string): Promise<void> {
-    await this.departmentsRepository.delete(maBoPhan);
+  async remove(MaBoPhan: string): Promise<void> {
+    await this.departmentsRepository.delete(MaBoPhan);
   }
 
   async create(dto: CreateDepartmentDto): Promise<Bophan | ValidationError[]> {
     // check uniqueness of username/email
-    const { maBoPhan, tenBoPhan } = dto;
+    const { MaBoPhan, TenBoPhan } = dto;
     const qb = await this.departmentsRepository
       .createQueryBuilder('bophan')
-      .where('bophan.MaBoPhan = :maBoPhan', { maBoPhan })
-      .orWhere('bophan.TenBoPhan = :tenBoPhan', { tenBoPhan });
+      .where('bophan.MaBoPhan = :MaBoPhan', { MaBoPhan })
+      .orWhere('bophan.TenBoPhan = :TenBoPhan', { TenBoPhan });
 
     const find = await qb.getOne();
 
     if (find) return [];
 
     const newDep = new Bophan();
-    newDep.maBoPhan = dto.maBoPhan;
-    newDep.tenBoPhan = dto.tenBoPhan;
-    newDep.moTa = dto.moTa;
+    newDep.MaBoPhan = dto.MaBoPhan;
+    newDep.TenBoPhan = dto.TenBoPhan;
+    newDep.MoTa = dto.MoTa;
 
     const errors = await validate(newDep);
     if (errors.length > 0) return errors;
@@ -47,7 +47,7 @@ export class DepartmentsService {
   }
 
   async update(dto: UpdateDepartmentDto) {
-    const maBoPhan = dto.maBoPhan;
-    return await this.departmentsRepository.update({ maBoPhan }, dto);
+    const MaBoPhan = dto.MaBoPhan;
+    return await this.departmentsRepository.update({ MaBoPhan }, dto);
   }
 }

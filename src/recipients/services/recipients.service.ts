@@ -20,24 +20,24 @@ export class RecipientsService {
     return this.recipientRepository.find();
   }
 
-  findOne(maNguoiNhan: string): Promise<Nguoinhan | null> {
-    return this.recipientRepository.findOneBy({ maNguoiNhan });
+  findOne(MaNguoiNhan: string): Promise<Nguoinhan | null> {
+    return this.recipientRepository.findOneBy({ MaNguoiNhan });
   }
 
-  async remove(maNguoiNhan: string): Promise<void> {
-    await this.recipientRepository.delete(maNguoiNhan);
+  async remove(MaNguoiNhan: string): Promise<void> {
+    await this.recipientRepository.delete(MaNguoiNhan);
   }
 
   joinWithCT(): Promise<JoinedRecipientDto[]> {
     return this.recipientRepository
       .createQueryBuilder('nguoinhan')
-      .leftJoinAndSelect('nguoinhan.maCongTrinh2', 'ct')
+      .leftJoinAndSelect('nguoinhan.MaCongTrinh2', 'ct')
       .select([
-        'nguoinhan.maNguoiNhan AS maNguoiNhan',
-        'nguoinhan.tenNguoiNhan AS tenNguoiNhan',
-        'nguoinhan.diaChi AS diaChi',
-        'nguoinhan.maCongTrinh AS maCongTrinh',
-        'ct.tenCongTrinh AS tenCongTrinh',
+        'nguoinhan.MaNguoiNhan AS MaNguoiNhan',
+        'nguoinhan.TenNguoiNhan AS TenNguoiNhan',
+        'nguoinhan.DiaChi AS DiaChi',
+        'nguoinhan.MaCongTrinh AS MaCongTrinh',
+        'ct.TenCongTrinh AS TenCongTrinh',
       ])
       .getRawMany();
   }
@@ -46,20 +46,20 @@ export class RecipientsService {
     dto: CreateRecipientDto,
   ): Promise<Nguoinhan | ValidationError[]> {
     // check uniqueness of username/email
-    const { maNguoiNhan } = dto;
+    const { MaNguoiNhan } = dto;
     const qb = await this.recipientRepository
       .createQueryBuilder('nguoinhan')
-      .where('nguoinhan.MaNguoiNhan = :maNguoiNhan', { maNguoiNhan });
+      .where('nguoinhan.MaNguoiNhan = :MaNguoiNhan', { MaNguoiNhan });
 
     const find = await qb.getOne();
 
     if (find) return [];
 
     const newMan = new Nguoinhan();
-    newMan.maNguoiNhan = dto.maNguoiNhan;
-    newMan.tenNguoiNhan = dto.tenNguoiNhan;
-    newMan.diaChi = dto.diaChi;
-    newMan.maCongTrinh = dto.maCongTrinh;
+    newMan.MaNguoiNhan = dto.MaNguoiNhan;
+    newMan.TenNguoiNhan = dto.TenNguoiNhan;
+    newMan.DiaChi = dto.DiaChi;
+    newMan.MaCongTrinh = dto.MaCongTrinh;
 
     const errors = await validate(newMan);
     if (errors.length > 0) return errors;
@@ -67,7 +67,7 @@ export class RecipientsService {
   }
 
   async update(dto: UpdateRecipientDto) {
-    const maNguoiNhan = dto.maNguoiNhan;
-    return await this.recipientRepository.update({ maNguoiNhan }, dto);
+    const MaNguoiNhan = dto.MaNguoiNhan;
+    return await this.recipientRepository.update({ MaNguoiNhan }, dto);
   }
 }

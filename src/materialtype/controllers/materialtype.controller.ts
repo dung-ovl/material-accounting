@@ -27,8 +27,8 @@ export class MaterialTypeController {
   }
 
   @Delete('/:MaLoai')
-  async delete(@Param('maLoai') maLoai: string) {
-    return await this.materialTypeService.remove(maLoai);
+  async delete(@Param('MaLoai') MaLoai: string) {
+    return await this.materialTypeService.remove(MaLoai);
   }
 
   @Post()

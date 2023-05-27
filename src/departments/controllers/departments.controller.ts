@@ -28,9 +28,9 @@ export class DepartmentsController {
   }
 
   @Public()
-  @Get('/:maBoPhan')
-  async getById(@Param('maBoPhan') maBoPhan: string) {
-    const acc = await this.departmentsService.findOne(maBoPhan);
+  @Get('/:MaBoPhan')
+  async getById(@Param('MaBoPhan') MaBoPhan: string) {
+    const acc = await this.departmentsService.findOne(MaBoPhan);
     if (acc == null) throw new NotFoundException();
     return acc;
   }
@@ -47,8 +47,8 @@ export class DepartmentsController {
     return await this.departmentsService.update(dto);
   }
 
-  @Delete('/:maBoPhan')
-  async delete(@Param('maBoPhan') maBoPhan: string) {
-    return await this.departmentsService.remove(maBoPhan);
+  @Delete('/:MaBoPhan')
+  async delete(@Param('MaBoPhan') MaBoPhan: string) {
+    return await this.departmentsService.remove(MaBoPhan);
   }
 }

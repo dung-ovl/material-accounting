@@ -4,33 +4,33 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateExportDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly soPhieu: string;
+  readonly SoPhieu: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly ngayXuat: string;
+  readonly NgayXuat: string;
 
   @ApiProperty({ required: false })
-  readonly maCongTrinh: string;
+  readonly MaCongTrinh: string;
 
   @ApiProperty({ required: false })
-  readonly maNguoiNhan: string;
+  readonly MaNguoiNhan: string;
 
   @ApiProperty({ required: false })
-  readonly maKho: string;
+  readonly MaKho: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly lyDo: string;
+  readonly LyDo: string;
 
   @ApiProperty({ required: false })
-  readonly tkNo: string;
+  readonly TKNo: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tongTien: string;
+  readonly TongTien: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly chungTuLq: string;
+  readonly ChungTuLQ: string;
 }

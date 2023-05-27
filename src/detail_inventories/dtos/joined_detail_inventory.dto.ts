@@ -4,51 +4,51 @@ import { IsNotEmpty } from 'class-validator';
 export class JoinedDetailInventoryDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maSo: number;
+  readonly MaSo: number;
 
   @ApiProperty({ required: false })
-  readonly soBienBan: string;
+  readonly SoBienBan: string;
 
   @ApiProperty({ required: false })
-  readonly maVt: string;
+  readonly MaVT: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly donGia: string;
+  readonly DonGia: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly slSoSach: number;
+  readonly SLSoSach: number;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly slThucTe: number;
+  readonly SLThucTe: number;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly slThua: number;
+  readonly SLThua: number;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly slThieu: number;
+  readonly SLThieu: number;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly slPhamChatTot: number;
+  readonly SLPhamChatTot: number;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly slPhamChatKem: number;
+  readonly SLPhamChatKem: number;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly slMatPhamChat: number;
+  readonly SLMatPhamChat: number;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenVt: string;
+  readonly TenVT: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenDvt: string; 
+  readonly TenDVT: string; 
 }

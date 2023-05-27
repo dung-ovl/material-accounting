@@ -5,20 +5,20 @@ import { Phieuxuat } from './Phieuxuat.entity';
 @Entity('congtrinh', { schema: 'ketoan' })
 export class Congtrinh {
   @Column('varchar', { primary: true, name: 'MaCongTrinh', length: 50 })
-  maCongTrinh: string;
+  MaCongTrinh: string;
 
   @Column('varchar', { name: 'TenCongTrinh', length: 50 })
-  tenCongTrinh: string;
+  TenCongTrinh: string;
 
   @Column('varchar', { name: 'DiaChi', length: 100 })
-  diaChi: string;
+  DiaChi: string;
 
   @Column('varchar', { name: 'MoTa', length: 100 })
-  moTa: string;
+  MoTa: string;
 
-  @OneToMany(() => Nguoinhan, (nguoinhan) => nguoinhan.maCongTrinh2)
+  @OneToMany(() => Nguoinhan, (nguoinhan) => nguoinhan.MaCongTrinh2)
   nguoinhans: Nguoinhan[];
 
-  @OneToMany(() => Phieuxuat, (phieuxuat) => phieuxuat.maCongTrinh2)
+  @OneToMany(() => Phieuxuat, (phieuxuat) => phieuxuat.MaCongTrinh2)
   phieuxuats: Phieuxuat[];
 }

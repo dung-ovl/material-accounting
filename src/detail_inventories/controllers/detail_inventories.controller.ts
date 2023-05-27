@@ -29,9 +29,9 @@ export class DetailInventoriesController {
 
 
   @Public()
-  @Get('/:soBienBan')
-  async getByIdInven(@Param('soBienBan') soBienBan: string) {
-    return await this.delinventoriesService.findByIdInven(soBienBan);
+  @Get('/:SoBienBan')
+  async getByIdInven(@Param('SoBienBan') SoBienBan: string) {
+    return await this.delinventoriesService.findByIdInven(SoBienBan);
   }
 
   @Post()
@@ -46,8 +46,8 @@ export class DetailInventoriesController {
     return await this.delinventoriesService.update(dto);
   }
 
-  @Delete('/:soBienBan')
-  async delete(@Param('soBienBan') soBienBan: string) {
-    return await this.delinventoriesService.remove(soBienBan);
+  @Delete('/:SoBienBan')
+  async delete(@Param('SoBienBan') SoBienBan: string) {
+    return await this.delinventoriesService.remove(SoBienBan);
   }
 }

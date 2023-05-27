@@ -4,20 +4,20 @@ import { IsNotEmpty } from 'class-validator';
 export class UpdateAccountDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maTk: string;
+  readonly MaTK: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly tenTk: string;
+  readonly TenTK: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly capTk: number;
+  readonly CapTK: number;
 
   @ApiProperty({ required: false })
-  readonly tkMe: string;
+  readonly TKMe: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly loaiTk: string;
+  readonly LoaiTK: string;
 }

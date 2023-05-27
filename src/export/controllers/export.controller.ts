@@ -46,13 +46,13 @@ export class ExportController {
     return await this.receiptService.update(dto);
   }
 
-  @Put('/:soPhieu')
-  async put(@Param('soPhieu') soPhieu: string, @Body() dto: UpdateExportDto) {
-    return await this.receiptService.updat2(soPhieu, dto);
+  @Put('/:SoPhieu')
+  async put(@Param('SoPhieu') SoPhieu: string, @Body() dto: UpdateExportDto) {
+    return await this.receiptService.updat2(SoPhieu, dto);
   }
 
-  @Delete('/:soPhieu')
-  async delete(@Param('soPhieu') soPhieu: string) {
-    return await this.receiptService.remove(soPhieu);
+  @Delete('/:SoPhieu')
+  async delete(@Param('SoPhieu') SoPhieu: string) {
+    return await this.receiptService.remove(SoPhieu);
   }
 }

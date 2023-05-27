@@ -16,31 +16,31 @@ export class MaterialTypeService {
     return this.materialTypeRepository.find();
   }
 
-  findOne(maLoai: string): Promise<Loaivattu | null> {
-    return this.materialTypeRepository.findOneBy({ maLoai });
+  findOne(MaLoai: string): Promise<Loaivattu | null> {
+    return this.materialTypeRepository.findOneBy({ MaLoai });
   }
 
-  async remove(maLoai: string): Promise<void> {
-    await this.materialTypeRepository.delete(maLoai);
+  async remove(MaLoai: string): Promise<void> {
+    await this.materialTypeRepository.delete(MaLoai);
   }
 
   async create(
     dto: CreateMaterialTypeDto,
   ): Promise<Loaivattu | ValidationError[]> {
     // check uniqueness of username/email
-    const { maLoai } = dto;
+    const { MaLoai } = dto;
     const qb = await this.materialTypeRepository
       .createQueryBuilder('loaivattu')
-      .where('loaivattu.maLoai = :maLoai', { maLoai });
+      .where('loaivattu.MaLoai = :MaLoai', { MaLoai });
 
     const find = await qb.getOne();
 
     if (find) return [];
 
     const newMaterialType = new Loaivattu();
-    newMaterialType.maLoai = dto.maLoai;
-    newMaterialType.tenLoai = dto.tenLoai;
-    newMaterialType.moTa = dto.moTa;
+    newMaterialType.MaLoai = dto.MaLoai;
+    newMaterialType.TenLoai = dto.TenLoai;
+    newMaterialType.MoTa = dto.MoTa;
 
     const errors = await validate(newMaterialType);
     if (errors.length > 0) return errors;
@@ -48,7 +48,7 @@ export class MaterialTypeService {
   }
 
   async update(dto: UpdateMaterialTypeDto) {
-    const maLoai = dto.maLoai;
-    return await this.materialTypeRepository.update({ maLoai }, dto);
+    const MaLoai = dto.MaLoai;
+    return await this.materialTypeRepository.update({ MaLoai }, dto);
   }
 }

@@ -4,25 +4,25 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateSurMaterialDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  readonly maSo: number;
+  readonly MaSo: number;
 
   @ApiProperty({ required: false })
   @IsNotEmpty()
-  readonly maVt: string;
+  readonly MaVT: string;
 
   @ApiProperty({ required: false })
   @IsNotEmpty()
-  readonly maKho: string;
+  readonly MaKho: string;
 
   @ApiProperty({ required: true })
   readonly ngay: string;
 
   @ApiProperty({ required: true })
-  readonly soLuong: number;
+  readonly SoLuong: number;
 
   @ApiProperty({ required: true })
-  readonly donGia: string;
+  readonly DonGia: string;
 
   @ApiProperty({ required: true })
-  readonly thanhTien: string;
+  readonly ThanhTien: string;
 }
