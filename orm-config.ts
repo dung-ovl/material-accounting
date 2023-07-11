@@ -4,9 +4,9 @@ const config: MysqlConnectionOptions = {
   type: 'mysql',
   database: 'ketoan',
   username: 'admin',
-  password: 'IifOrAyD',
-  port: 16677,
-  host: 'mysql-130464-0.cloudclusters.net',
+  password: 'gqdNjR0H',
+  port: 19213,
+  host: 'mysql-135253-0.cloudclusters.net',
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: false, // false để khi bạn thay đổi trong entities nó sẽ không tự update DB
   dropSchema: false,
