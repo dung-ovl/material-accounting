@@ -15,6 +15,7 @@ import { CreateDetailExportDto, UpdateDetailExportDto, QueryExportDto } from '..
 import { Public } from 'src/middleware/auth.public';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CtPhieunhap } from 'entities/CtPhieunhap.entity';
+import { CtPhieuxuat } from 'entities/CtPhieuxuat.entity';
 
 @ApiBearerAuth()
 @ApiTags('ct_phieuxuat')
@@ -68,7 +69,7 @@ export class DetailExportController {
   @Post()
   async create(@Body() dto: CreateDetailExportDto) {
     const result = await this.detReceiptService.create(dto);
-    if (result instanceof CtPhieunhap) return 'OK';
+    if (result instanceof CtPhieuxuat) return 'OK';
     else throw new BadRequestException(result);
   }
 

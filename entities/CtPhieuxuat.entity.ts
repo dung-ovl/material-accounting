@@ -35,14 +35,14 @@ export class CtPhieuxuat {
   ThanhTien: string;
 
   @ManyToOne(() => Phieuxuat, (phieuxuat) => phieuxuat.ctPhieuxuats, {
-    onDelete: 'RESTRICT',
+    onDelete: 'CASCADE',
     onUpdate: 'RESTRICT',
   })
   @JoinColumn([{ name: 'SoPhieu', referencedColumnName: 'SoPhieu' }])
   SoPhieu2: Phieuxuat;
 
   @ManyToOne(() => Vattu, (vattu) => vattu.ctPhieuxuats, {
-    onDelete: 'RESTRICT',
+    onDelete: 'CASCADE',
     onUpdate: 'RESTRICT',
   })
   @JoinColumn([{ name: 'MaVT', referencedColumnName: 'MaVT' }])

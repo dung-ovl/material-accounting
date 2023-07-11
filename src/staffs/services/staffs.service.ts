@@ -32,7 +32,7 @@ export class StaffsService {
         'nhanvien.MaNV AS MaNV',
         'nhanvien.TenNV AS TenNV',
         'nhanvien.MaBoPhan AS MaBoPhan',
-        'bp.MaBoPhan AS TenBoPhan',
+        'bp.TenBoPhan AS TenBoPhan',
       ])
       .getRawMany();
   }

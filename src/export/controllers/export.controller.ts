@@ -14,6 +14,7 @@ import { CreateExportDto, UpdateExportDto } from '../dtos/index';
 import { Public } from 'src/middleware/auth.public';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Phieunhap } from 'entities/Phieunhap.entity';
+import { Phieuxuat } from 'entities/Phieuxuat.entity';
 
 @ApiBearerAuth()
 @ApiTags('phieuxuat')
@@ -37,7 +38,7 @@ export class ExportController {
   @Post()
   async create(@Body() dto: CreateExportDto) {
     const result = await this.receiptService.create(dto);
-    if (result instanceof Phieunhap) return 'OK';
+    if (result instanceof Phieuxuat) return 'OK';
     else throw new BadRequestException(result);
   }
 
