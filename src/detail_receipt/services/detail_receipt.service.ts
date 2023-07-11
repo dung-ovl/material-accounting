@@ -153,7 +153,7 @@ export class DetailReceiptService {
     const { MaSo } = dto;
     const qb = await this.receiptRepository
       .createQueryBuilder('ct_phieunhap')
-      .where('phieunhap.MaSo = :MaSo', { MaSo });
+      .where('ct_phieunhap.MaSo = :MaSo', { MaSo });
 
     const inv = await qb.getOne();
 

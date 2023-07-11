@@ -42,7 +42,7 @@ export class Phieunhap {
   @Column('decimal', { name: 'TongTien', precision: 19, scale: 0 })
   TongTien: string;
 
-  @Column('varchar', { name: 'ChungTuLQ', length: 100 })
+  @Column('varchar', { name: 'ChungTuLQ', nullable: true, length: 100 })
   ChungTuLQ: string;
 
   @OneToMany(() => CtPhieunhap, (ctPhieunhap) => ctPhieunhap.SoPhieu2)

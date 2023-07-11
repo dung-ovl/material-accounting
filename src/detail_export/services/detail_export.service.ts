@@ -141,7 +141,7 @@ export class DetailExportService {
     const { MaSo } = dto;
     const qb = await this.exportRepository
       .createQueryBuilder('ct_phieuxuat')
-      .where('phieunhap.MaSo = :MaSo', { MaSo });
+      .where('ct_phieuxuat.MaSo = :MaSo', { MaSo });
 
     const inv = await qb.getOne();
 
