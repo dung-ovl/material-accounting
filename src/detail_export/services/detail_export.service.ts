@@ -22,7 +22,11 @@ export class DetailExportService {
   }
 
   async remove(SoPhieu: string): Promise<void> {
-    await this.exportRepository.delete(SoPhieu);
+    await this.exportRepository
+          .createQueryBuilder('ct_phieuxuat')
+          .delete()
+          .where('ct_phieuxuat.SoPhieu = :SoPhieu', { SoPhieu })
+          .execute()
   }
 
   getByChart(params: QueryExportDto): Promise<JoinedDetailExportDto[]> {
