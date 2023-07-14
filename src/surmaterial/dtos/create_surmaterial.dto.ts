@@ -15,7 +15,7 @@ export class CreateSurMaterialDto {
   readonly MaKho: string;
 
   @ApiProperty({ required: true })
-  readonly ngay: string;
+  readonly Ngay: string;
 
   @ApiProperty({ required: true })
   readonly SoLuong: number;

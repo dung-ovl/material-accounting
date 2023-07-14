@@ -23,7 +23,7 @@ export class Dudauvattu {
   MaKho: string;
 
   @Column('date', { name: 'Ngay' })
-  ngay: string;
+  Ngay: string;
 
   @Column('double', { name: 'SoLuong', precision: 22 })
   SoLuong: number;

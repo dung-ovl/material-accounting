@@ -31,7 +31,7 @@ export class SurMaterialService {
   async create(
     dto: CreateSurMaterialDto,
   ): Promise<Dudauvattu | ValidationError[]> {
-    // check uniqueness of username/email
+    // check uniqueness of userName/email
     const { MaSo } = dto;
     const qb = await this.surMaterialRepository
       .createQueryBuilder('dudauvattu')
@@ -45,7 +45,7 @@ export class SurMaterialService {
     newSurMaterial.MaSo = dto.MaSo;
     newSurMaterial.MaVT = dto.MaVT;
     newSurMaterial.MaKho = dto.MaKho;
-    newSurMaterial.ngay = dto.ngay;
+    newSurMaterial.Ngay = dto.Ngay;
     newSurMaterial.SoLuong = dto.SoLuong;
     newSurMaterial.DonGia = dto.DonGia;
     newSurMaterial.ThanhTien = dto.ThanhTien;
@@ -62,24 +62,24 @@ export class SurMaterialService {
 
   async getStocksByDay(params: QuerySurmaterialDto): Promise<Dudauvattu[]> {
     const MaKho = params.MaKho;
-    const ngay = params.ngay;
+    const Ngay = params.Ngay;
     return await this.surMaterialRepository
       .createQueryBuilder('dudauvattu')
       .where('dudauvattu.MaKho = :MaKho', { MaKho })
-      .andWhere('dudauvattu.ngay <= :ngay', { ngay })
+      .andWhere('dudauvattu.Ngay <= :Ngay', { Ngay })
       .getMany();
   }
 
   async getStocksByMonth(params: QuerySurmaterialDto): Promise<Dudauvattu[]> {
     const MaKho = params.MaKho;
-    const thang = params.thang;
-    const nam = params.nam;
+    const Thang = params.Thang;
+    const Nam = params.Nam;
     return await this.surMaterialRepository
       .createQueryBuilder('dudauvattu')
       .where('dudauvattu.MaKho = :MaKho', { MaKho })
-      .andWhere('dudauvattu.ngay BETWEEN :start AND :end', {
-        start: `${nam}-${thang}-01`,
-        end: `${nam}-${thang}-31`,
+      .andWhere('dudauvattu.Ngay BETWEEN :start AND :end', {
+        start: `${Nam}-${Thang}-01`,
+        end: `${Nam}-${Thang}-31`,
       })
       .getMany();
   }
@@ -87,17 +87,17 @@ export class SurMaterialService {
   async getStockByMonth(params: QuerySurmaterialDto): Promise<Dudauvattu> {
     const MaVT = params.MaVT;
     const MaKho = params.MaKho;
-    const thang = params.thang;
-    const nam = params.nam;
+    const Thang = params.Thang;
+    const Nam = params.Nam;
     return await this.surMaterialRepository
       .createQueryBuilder('dudauvattu')
       .where('dudauvattu.MaKho = :MaKho', { MaKho })
       .andWhere('dudauvattu.MaVT = :MaVT', { MaVT })
-      .andWhere('dudauvattu.ngay BETWEEN :start AND :end', {
-        start: `${nam}-${thang}-01`,
-        end: `${nam}-${thang}-31`,
+      .andWhere('dudauvattu.Ngay BETWEEN :start AND :end', {
+        start: `${Nam}-${Thang}-01`,
+        end: `${Nam}-${Thang}-31`,
       })
-      .orderBy('dudauvattu.ngay', 'ASC')
+      .orderBy('dudauvattu.Ngay', 'ASC')
       .getRawOne();
   }
 
@@ -109,22 +109,22 @@ export class SurMaterialService {
       .createQueryBuilder('dudauvattu')
       .where('dudauvattu.MaKho = :MaKho', { MaKho })
       .andWhere('dudauvattu.MaVT = :MaVT', { MaVT })
-      .andWhere('dudauvattu.ngay <= :NgayLap', { NgayLap })
-      .orderBy('dudauvattu.ngay', 'DESC')
+      .andWhere('dudauvattu.Ngay <= :NgayLap', { NgayLap })
+      .orderBy('dudauvattu.Ngay', 'DESC')
       .getRawOne();
   }
 
   async getStockByYear(params: QuerySurmaterialDto): Promise<Dudauvattu[]> {
     const MaVT = params.MaVT;
     const MaKho = params.MaKho;
-    const nam = params.nam;
+    const Nam = params.Nam;
     return await this.surMaterialRepository
       .createQueryBuilder('dudauvattu')
       .where('dudauvattu.MaKho = :MaKho', { MaKho })
       .andWhere('dudauvattu.MaVT = :MaVT', { MaVT })
-      .andWhere('dudauvattu.ngay BETWEEN :start AND :end', {
-        start: `${nam}-01-01`,
-        end: `${nam}-12-31`,
+      .andWhere('dudauvattu.Ngay BETWEEN :start AND :end', {
+        start: `${Nam}-01-01`,
+        end: `${Nam}-12-31`,
       })
       .getRawMany();
   }

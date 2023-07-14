@@ -8,13 +8,13 @@ export class QuerySurmaterialDto {
   readonly MaVT: string;
 
   @ApiProperty({ required: false })
-  readonly ngay: string;
+  readonly Ngay: string;
 
   @ApiProperty({ required: false })
-  readonly thang: string;
+  readonly Thang: string;
 
   @ApiProperty({ required: false })
-  readonly nam: string;
+  readonly Nam: string;
 
   @ApiProperty({ required: false })
   readonly NgayLap: string;

@@ -18,6 +18,7 @@ import {
   UpdateSurMaterialDto,
   QuerySurmaterialDto,
 } from '../dtos';
+import { Dudauvattu } from 'entities/Dudauvattu.entity';
 
 @ApiBearerAuth()
 @ApiTags('dudauvattu')
@@ -34,7 +35,7 @@ export class SurMaterialController {
   @Post()
   async create(@Body() dto: CreateSurMaterialDto) {
     const result = await this.surMaterialService.create(dto);
-    if (result instanceof Kho) return 'OK';
+    if (result instanceof Dudauvattu) return 'OK';
     else throw new BadRequestException(result);
   }
 

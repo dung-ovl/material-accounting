@@ -17,6 +17,7 @@ import {
   UpdateMaterialDto,
   JoinedMaterialDto,
 } from '../dtos';
+import { Vattu } from 'entities/Vattu.entity';
 
 @ApiBearerAuth()
 @ApiTags('vattu')
@@ -39,7 +40,7 @@ export class MaterialController {
   @Post()
   async create(@Body() dto: CreateMaterialDto) {
     const result = await this.materialService.create(dto);
-    if (result instanceof Kho) return 'OK';
+    if (result instanceof Vattu) return 'OK';
     else throw new BadRequestException(result);
   }
 
