@@ -8,5 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [TypeOrmModule.forFeature([Dudauvattu])],
   controllers: [SurMaterialController],
   providers: [SurMaterialService],
+  exports: [SurMaterialService],
 })
 export class SurMaterialModule {}

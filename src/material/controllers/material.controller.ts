@@ -1,3 +1,4 @@
+import { QuerySurmaterialDto } from './../../surmaterial/dtos/query_surmaterial.dto';
 import {
   BadRequestException,
   Body,
@@ -7,15 +8,15 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
-import { MaterialService } from '../services/material.service';
+import MaterialService from '../services/material.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/middleware/auth.public';
-import { Kho } from 'entities/Kho.entity';
 import {
   CreateMaterialDto,
   UpdateMaterialDto,
-  JoinedMaterialDto,
+  QueryMaterialDto,
 } from '../dtos';
 import { Vattu } from 'entities/Vattu.entity';
 
@@ -52,5 +53,10 @@ export class MaterialController {
   @Delete('/:MaVT')
   async delete(@Param('MaVT') MaVT: string) {
     return await this.materialService.remove(MaVT);
+  }
+
+  @Put('/tinhgiaxuat')
+  async tinhgiaxuat(@Query() params: QueryMaterialDto) {
+    return await this.materialService.tinhgiaxuat(params);
   }
 }

@@ -10,7 +10,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { DetailReceiptService } from '../services/detail_receipt.service';
+import DetailReceiptService from '../services/detail_receipt.service';
 import { CreateDetailReceiptDto, UpdateDetailReceiptDto, QueryReceiptDto } from '../dtos/index';
 import { Public } from 'src/middleware/auth.public';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';

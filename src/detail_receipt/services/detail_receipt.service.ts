@@ -10,9 +10,10 @@ import {
 import { ValidationError, validate } from 'class-validator';
 import { JoinedDetailReceiptDto } from '../dtos/joined_detail_receipt.dto';
 import { CtPhieunhap } from 'entities/CtPhieunhap.entity';
+import { QueryMaterialDto } from 'src/material/dtos';
 
 @Injectable()
-export class DetailReceiptService {
+export default class DetailReceiptService {
   constructor(
     @InjectRepository(CtPhieunhap)
     private readonly receiptRepository: Repository<CtPhieunhap>,
@@ -24,10 +25,10 @@ export class DetailReceiptService {
 
   async remove(SoPhieu: string): Promise<void> {
     await this.receiptRepository
-          .createQueryBuilder('ct_phieunhap')
-          .delete()
-          .where('ct_phieunhap.SoPhieu = :SoPhieu', { SoPhieu })
-          .execute()
+      .createQueryBuilder('ct_phieunhap')
+      .delete()
+      .where('ct_phieunhap.SoPhieu = :SoPhieu', { SoPhieu })
+      .execute();
   }
 
   getByChart(params: QueryReceiptDto): Promise<JoinedDetailReceiptDto[]> {
@@ -148,6 +149,33 @@ export class DetailReceiptService {
       ])
       .where('ct_phieunhap.SoPhieu = :SoPhieu', { SoPhieu })
       .getRawMany();
+  }
+
+  getSoluong(MaVT: string, NgayBD: string, NgayKT: string) {
+    return this.receiptRepository
+      .createQueryBuilder('ct_phieunhap')
+      .leftJoin('ct_phieunhap.SoPhieu2', 'SoPhieu2')
+      .where('ct_phieunhap.MaVT = :MaVT', { MaVT })
+      .andWhere('SoPhieu2.NgayNhap BETWEEN :start AND :end', {
+        start: NgayBD,
+        end: NgayKT,
+      })
+      .select([
+        'ct_phieunhap.SLThucTe AS SLThucTe',
+        'ct_phieunhap.ThanhTien AS ThanhTien',
+      ])
+      .getRawMany();
+  }
+
+  async updateDonGiaXuat(MaVT: string, DonGia: string) {
+    return this.receiptRepository
+      .createQueryBuilder('ct_phieunhap')
+      .where('ct_phieunhap.MaVT = :MaVT', { MaVT })
+      .update({ DonGia: DonGia })
+      .update({
+        ThanhTien: () => 'ct_phieunhap.SLThucTe * ct_phieunhap.DonGia',
+      })
+      .execute();
   }
 
   async create(

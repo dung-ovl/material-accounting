@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DetailReceiptController } from './controllers/detail_receipt.controller';
-import { DetailReceiptService } from './services/detail_receipt.service';
+import DetailReceiptService from './services/detail_receipt.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CtPhieunhap } from 'entities/CtPhieunhap.entity';
 
@@ -8,5 +8,6 @@ import { CtPhieunhap } from 'entities/CtPhieunhap.entity';
   imports: [TypeOrmModule.forFeature([CtPhieunhap])],
   controllers: [DetailReceiptController],
   providers: [DetailReceiptService],
+  exports: [DetailReceiptService],
 })
 export class DetailReceiptModule {}

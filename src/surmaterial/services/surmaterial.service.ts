@@ -8,6 +8,7 @@ import {
   QuerySurmaterialDto,
 } from '../dtos';
 import { validate } from 'class-validator';
+import { QueryMaterialDto } from 'src/material/dtos';
 
 @Injectable()
 export class SurMaterialService {
@@ -169,6 +170,21 @@ export class SurMaterialService {
         'dudauvattu.Ngay as Ngay',
         'dudauvattu.SoLuong as SoLuong',
         'dudauvattu.DonGia as DonGia',
+        'dudauvattu.ThanhTien as ThanhTien',
+      ])
+      .getRawMany();
+  }
+
+  async GetTonKho(MaVT: string, NgayBD: string, NgayKT: string) {
+    return this.surMaterialRepository
+      .createQueryBuilder('dudauvattu')
+      .where('dudauvattu.MaVT = :MaVT', { MaVT })
+      .andWhere('dudauvattu.Ngay BETWEEN :start AND :end', {
+        start: NgayBD,
+        end: NgayKT,
+      })
+      .select([
+        'dudauvattu.SoLuong as SoLuong',
         'dudauvattu.ThanhTien as ThanhTien',
       ])
       .getRawMany();
