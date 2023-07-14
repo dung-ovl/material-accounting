@@ -1,15 +1,19 @@
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../services/users.service';
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
+  HttpStatus,
   Post,
+  Put,
   UnauthorizedException,
 } from '@nestjs/common';
-import { LoginDto } from '../dtos';
+import { LoginDto, UpdateUserDto } from '../dtos';
 import { Public } from 'src/middleware/auth.public';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from '../dtos/create_dto';
 
 @ApiBearerAuth()
 @ApiTags('nguoidung')
@@ -35,5 +39,19 @@ export class UsersController {
   @Get()
   getUsers() {
     return this.userService.findUsers();
+  }
+
+  @Post()
+  async createUser(@Body() dto: CreateUserDto) {
+    const auth = await this.userService.createUser(dto);
+    if (auth === null) throw new BadRequestException();
+    return HttpStatus.OK;
+  }
+
+  @Put()
+  async updateUser(@Body() dto: UpdateUserDto) {
+    const auth = await this.userService.updateUser(dto);
+    if (auth === null) throw new BadRequestException();
+    return HttpStatus.OK;
   }
 }
