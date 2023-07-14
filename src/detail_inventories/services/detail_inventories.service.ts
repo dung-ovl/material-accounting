@@ -18,7 +18,11 @@ export class DetailInventoriesService {
   }
 
   async remove(SoBienBan: string): Promise<void> {
-    await this.delinventoryRepository.delete(SoBienBan);
+    await this.delinventoryRepository
+          .createQueryBuilder('ct_bbkiemke')
+          .delete()
+          .where('ct_bbkiemke.SoBienBan = :SoBienBan', { SoBienBan })
+          .execute()
   }
 
   findByIdInven(SoBienBan: string): Promise<JoinedDetailInventoryDto[]> {

@@ -23,7 +23,11 @@ export class DetailReceiptService {
   }
 
   async remove(SoPhieu: string): Promise<void> {
-    await this.receiptRepository.delete(SoPhieu);
+    await this.receiptRepository
+          .createQueryBuilder('ct_phieunhap')
+          .delete()
+          .where('ct_phieunhap.SoPhieu = :SoPhieu', { SoPhieu })
+          .execute()
   }
 
   getByChart(params: QueryReceiptDto): Promise<JoinedDetailReceiptDto[]> {
