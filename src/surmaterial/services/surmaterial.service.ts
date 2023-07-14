@@ -67,6 +67,15 @@ export class SurMaterialService {
       .createQueryBuilder('dudauvattu')
       .where('dudauvattu.MaKho = :MaKho', { MaKho })
       .andWhere('dudauvattu.Ngay <= :Ngay', { Ngay })
+      .select([
+        'dudauvattu.MaSo as MaSo',
+        'dudauvattu.MaVT as MaVT',
+        'dudauvattu.MaKho as MaKho',
+        'dudauvattu.Ngay as Ngay',
+        'dudauvattu.SoLuong as SoLuong',
+        'dudauvattu.DonGia as DonGia',
+        'dudauvattu.ThanhTien as ThanhTien',
+      ])
       .getRawMany();
   }
 
@@ -81,6 +90,15 @@ export class SurMaterialService {
         start: `${Nam}-${Thang}-01`,
         end: `${Nam}-${Thang}-31`,
       })
+      .select([
+        'dudauvattu.MaSo as MaSo',
+        'dudauvattu.MaVT as MaVT',
+        'dudauvattu.MaKho as MaKho',
+        'dudauvattu.Ngay as Ngay',
+        'dudauvattu.SoLuong as SoLuong',
+        'dudauvattu.DonGia as DonGia',
+        'dudauvattu.ThanhTien as ThanhTien',
+      ])
       .getRawMany();
   }
 
@@ -98,6 +116,15 @@ export class SurMaterialService {
         end: `${Nam}-${Thang}-31`,
       })
       .orderBy('dudauvattu.Ngay', 'ASC')
+      .select([
+        'dudauvattu.MaSo as MaSo',
+        'dudauvattu.MaVT as MaVT',
+        'dudauvattu.MaKho as MaKho',
+        'dudauvattu.Ngay as Ngay',
+        'dudauvattu.SoLuong as SoLuong',
+        'dudauvattu.DonGia as DonGia',
+        'dudauvattu.ThanhTien as ThanhTien',
+      ])
       .getRawMany();
   }
 
@@ -111,6 +138,15 @@ export class SurMaterialService {
       .andWhere('dudauvattu.MaVT = :MaVT', { MaVT })
       .andWhere('dudauvattu.Ngay <= :NgayLap', { NgayLap })
       .orderBy('dudauvattu.Ngay', 'DESC')
+      .select([
+        'dudauvattu.MaSo as MaSo',
+        'dudauvattu.MaVT as MaVT',
+        'dudauvattu.MaKho as MaKho',
+        'dudauvattu.Ngay as Ngay',
+        'dudauvattu.SoLuong as SoLuong',
+        'dudauvattu.DonGia as DonGia',
+        'dudauvattu.ThanhTien as ThanhTien',
+      ])
       .getRawMany();
   }
 
@@ -126,6 +162,15 @@ export class SurMaterialService {
         start: `${Nam}-01-01`,
         end: `${Nam}-12-31`,
       })
+      .select([
+        'dudauvattu.MaSo as MaSo',
+        'dudauvattu.MaVT as MaVT',
+        'dudauvattu.MaKho as MaKho',
+        'dudauvattu.Ngay as Ngay',
+        'dudauvattu.SoLuong as SoLuong',
+        'dudauvattu.DonGia as DonGia',
+        'dudauvattu.ThanhTien as ThanhTien',
+      ])
       .getRawMany();
   }
 }
