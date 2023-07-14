@@ -49,7 +49,7 @@ export class DetailReceiptController {
   @Public()
   @Get('/ctpnthang')
   async getAllWithMonth(@Query() params: QueryReceiptDto) {
-    return await this.detReceiptService.getAllByMonth(params);
+    return await this.detReceiptService.getByMonth(params);
   }
 
   @Public()

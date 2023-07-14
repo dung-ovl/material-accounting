@@ -67,7 +67,7 @@ export class SurMaterialService {
       .createQueryBuilder('dudauvattu')
       .where('dudauvattu.MaKho = :MaKho', { MaKho })
       .andWhere('dudauvattu.Ngay <= :Ngay', { Ngay })
-      .getMany();
+      .getRawMany();
   }
 
   async getStocksByMonth(params: QuerySurmaterialDto): Promise<Dudauvattu[]> {
@@ -81,10 +81,10 @@ export class SurMaterialService {
         start: `${Nam}-${Thang}-01`,
         end: `${Nam}-${Thang}-31`,
       })
-      .getMany();
+      .getRawMany();
   }
 
-  async getStockByMonth(params: QuerySurmaterialDto): Promise<Dudauvattu> {
+  async getStockByMonth(params: QuerySurmaterialDto): Promise<Dudauvattu[]> {
     const MaVT = params.MaVT;
     const MaKho = params.MaKho;
     const Thang = params.Thang;
@@ -98,10 +98,10 @@ export class SurMaterialService {
         end: `${Nam}-${Thang}-31`,
       })
       .orderBy('dudauvattu.Ngay', 'ASC')
-      .getRawOne();
+      .getRawMany();
   }
 
-  async getStock(params: QuerySurmaterialDto): Promise<Dudauvattu> {
+  async getStock(params: QuerySurmaterialDto): Promise<Dudauvattu[]> {
     const MaVT = params.MaVT;
     const MaKho = params.MaKho;
     const NgayLap = params.NgayLap;
@@ -111,7 +111,7 @@ export class SurMaterialService {
       .andWhere('dudauvattu.MaVT = :MaVT', { MaVT })
       .andWhere('dudauvattu.Ngay <= :NgayLap', { NgayLap })
       .orderBy('dudauvattu.Ngay', 'DESC')
-      .getRawOne();
+      .getRawMany();
   }
 
   async getStockByYear(params: QuerySurmaterialDto): Promise<Dudauvattu[]> {

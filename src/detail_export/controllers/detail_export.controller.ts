@@ -51,7 +51,7 @@ export class DetailExportController {
   @Public()
   @Get('/ctpxthang')
   async getAllWithMonth(@Query() params: QueryExportDto) {
-    return await this.detReceiptService.getAllByMonth(params);
+    return await this.detReceiptService.getByMonth(params);
   }
 
   @Public()
