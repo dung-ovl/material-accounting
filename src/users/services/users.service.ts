@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Nguoidung } from 'entities/Nguoidung.entity';
 import { CreateUserDto } from '../dtos/create_dto';
 import { validate } from 'class-validator';
-import { UpdateUserDto } from '../dtos';
+import { LoginDto, UpdateUserDto } from '../dtos';
 
 @Injectable()
 export class UsersService {
@@ -17,10 +17,9 @@ export class UsersService {
     return await this.userRepository.find();
   }
 
-  async findOne(
-    TenDangNhap: string,
-    MatKhau: string,
-  ): Promise<Nguoidung | null> {
+  async findOne(dto: LoginDto): Promise<Nguoidung | null> {
+    if (dto.MatKhau === undefined || dto.TenDangNhap === undefined) return null;
+    const { TenDangNhap, MatKhau } = dto;
     return await this.userRepository.findOneBy({ TenDangNhap, MatKhau });
   }
 
@@ -56,5 +55,9 @@ export class UsersService {
     const inv = await qb.getOne();
     if (inv === null) return null;
     return await this.userRepository.update({ TenDangNhap }, dto);
+  }
+
+  remove(TenDangNhap: string) {
+    return this.userRepository.delete(TenDangNhap);
   }
 }
